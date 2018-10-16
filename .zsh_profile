@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+source ~/.zplug/init.zsh
+
+# Tools
+zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
+zplug "stedolan/jq", from:gh-r, as:command, rename-to:jq
+zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg
+zplug "wting/autojump", use:"bin/autojump", as:command, rename-to:autojump
+
+# Themes
+zplug "mafredri/zsh-async", from:github, use:async.zsh
+zplug "sindresorhus/pure", from:github, use:pure.zsh, as:theme
+
+# Awesome things
+# zplug "plugins/git", from:oh-my-zsh
+# zplug "plugins/autojump", from:oh-my-zsh
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-completions"
+zplug "wting/autojump", use:"bin/autojump.zsh"
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
