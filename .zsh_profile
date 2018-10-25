@@ -1,31 +1,58 @@
 #!/bin/zsh
 
+if [[ ! -d ~/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/.zplug
+  source ~/.zplug/init.zsh && zplug update --self
+fi
+
 source ~/.zplug/init.zsh
 
+# Themes
+zplug "mafredri/zsh-async", from:github, use:"async.zsh"
+zplug "sindresorhus/pure", from:github, use:"pure.zsh", as:theme
+# PURE_GIT_UP_ARROW='↑'
+# PURE_GIT_DOWN_ARROW='↓'
+
 # Tools
-zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
 zplug "stedolan/jq", from:gh-r, as:command, rename-to:jq
 zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg
-zplug "wting/autojump", use:"bin/autojump", as:command, rename-to:autojump
+zplug "dbrgn/tealdeer", from:gh-r, as:command, rename-to:tldr, use:"tldr-x86_64-musl"
 
-# Themes
-zplug "mafredri/zsh-async", from:github, use:async.zsh
-zplug "sindresorhus/pure", from:github, use:pure.zsh, as:theme
+# FZF
+zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
+zplug "junegunn/fzf", use:"shell/*.zsh"
+FZF_DEFAULT_COMMAND='rg --files --hidden --follow --ansi'
+FZF_DEFAULT_OPTS='--color 16'
 
-# Awesome things
-# zplug "plugins/git", from:oh-my-zsh
-# zplug "plugins/autojump", from:oh-my-zsh
+# J
+zplug "rupa/z", use:"*.sh"
+# zplug "wting/autojump", use:"bin/autojump", as:command, rename-to:autojump
+# zplug "wting/autojump", use:"bin/autojump.zsh"
+
+# Awesome
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
-zplug "wting/autojump", use:"bin/autojump.zsh"
+# zplug "zsh-users/zsh-autosuggestions"
+zplug "supercrabtree/k"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
 fi
 
 # Then, source plugins and add commands to $PATH
-zplug load --verbose
+zplug load #--verbose
+
+# History
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=100000
+SAVEHIST=$HISTSIZE
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+
+# vim: sw=2 ts=2 et
