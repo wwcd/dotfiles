@@ -10,20 +10,21 @@ fi
 # Themes
 zplug "mafredri/zsh-async", from:github, use:"async.zsh"
 zplug "sindresorhus/pure", from:github, use:"pure.zsh", as:theme
-# PURE_GIT_UP_ARROW='↑'
+# PURE_PROMPT_SYMBOL='»'
 # PURE_GIT_DOWN_ARROW='↓'
+# PURE_GIT_UP_ARROW='↑'
 
 # Tools
 zplug "stedolan/jq", from:gh-r, as:command, rename-to:jq
-zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg
-zplug "sharkdp/bat", from:gh-r, as:command, rename-to:bat, bpick:"*linux-musl*"
-zplug "dbrgn/tealdeer", from:gh-r, as:command, rename-to:tldr, use:"*tldr-x86_64-musl*"
+zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg, use:"*x86_64*musl*"
+zplug "dbrgn/tealdeer", from:gh-r, as:command, rename-to:tldr, use:"*x86_64*musl*"
+# zplug "sharkdp/bat", from:gh-r, as:command, rename-to:bat, use:"*linux-musl*"
 
 # FZF
 zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf
 zplug "junegunn/fzf", use:"shell/*.zsh"
 FZF_DEFAULT_COMMAND='rg --files --hidden --follow --ansi'
-FZF_DEFAULT_OPTS='--color 16'
+FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1'
 
 # J
 zplug "rupa/z", use:"*.sh"
@@ -55,6 +56,9 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
+
+# completion
+setopt noautomenu
 
 # misc
 bindkey \^U backward-kill-line
