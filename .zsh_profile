@@ -11,9 +11,6 @@ fi
 zplug "mafredri/zsh-async", from:github, use:"async.zsh"
 zplug "sindresorhus/pure", from:github, use:"pure.zsh", as:theme
 PURE_GIT_PULL=1
-# PURE_PROMPT_SYMBOL='»'
-PURE_PROMPT_SYMBOL='>'
-# PURE_PROMPT_SYMBOL='✘'
 PURE_GIT_DOWN_ARROW='↓'
 PURE_GIT_UP_ARROW='↑'
 
