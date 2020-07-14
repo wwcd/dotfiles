@@ -10,7 +10,10 @@ fi
 # Themes
 zplug "mafredri/zsh-async", from:github, use:"async.zsh"
 zplug "sindresorhus/pure", from:github, use:"pure.zsh", as:theme
-PURE_PROMPT_SYMBOL='✘'
+PURE_GIT_PULL=1
+# PURE_PROMPT_SYMBOL='»'
+PURE_PROMPT_SYMBOL='>'
+# PURE_PROMPT_SYMBOL='✘'
 PURE_GIT_DOWN_ARROW='↓'
 PURE_GIT_UP_ARROW='↑'
 
@@ -47,6 +50,13 @@ fi
 # Then, source plugins and add commands to $PATH
 zplug load #--verbose
 
+# Custom
+unalias z 2> /dev/null
+z() {
+  [ $# -gt 0 ] && _z "$*" && return
+  cd "$(_z -l 2>&1 | fzf $FZF_DEFAULT_OPTS --height 40% --reverse --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+}
+
 # History
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=100000
@@ -61,7 +71,7 @@ bindkey \^U backward-kill-line
 
 # completion
 setopt noautomenu
-fpath=(~/.zsh/completion $fpath)
+fpath=(~/.zsh/completion /usr/share/zsh/vendor-completions $fpath)
 autoload -Uz compinit && compinit -i
 
 # vim: sw=2 ts=2 et
