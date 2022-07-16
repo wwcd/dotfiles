@@ -7,30 +7,49 @@ else
   source ~/.zplug/init.zsh
 fi
 
+# completion
+setopt noautomenu
+fpath=(~/.zsh/completion /usr/share/zsh/vendor-completions $fpath)
+autoload -Uz compinit && compinit -i
+
+# History
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=100000
+SAVEHIST=$HISTSIZE
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+
+# misc
+bindkey \^U backward-kill-line
+
+
 # Themes
 zplug "mafredri/zsh-async", from:github, use:"async.zsh"
 zplug "sindresorhus/pure", from:github, use:"pure.zsh", as:theme
-PURE_GIT_PULL=1
-# PURE_PROMPT_SYMBOL='»'
-# PURE_GIT_DOWN_ARROW='↓'
-# PURE_GIT_UP_ARROW='↑'
+export PURE_GIT_PULL=1
 
 # Tools
 zplug "stedolan/jq", from:gh-r, as:command, rename-to:jq
 zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg, use:"*x86_64*musl*"
+zplug "dbrgn/tealdeer", from:gh-r, as:command, rename-to:tldr, use:"*linux*x86_64*musl"
 zplug "sharkdp/fd", from:gh-r, as:command, rename-to:fd, use:"*x86_64*linux*musl*"
-# zplug "dbrgn/tealdeer", from:gh-r, as:command, rename-to:tldr, use:"*linux*x86_64*musl"
-# zplug "sharkdp/bat", from:gh-r, as:command, rename-to:bat, use:"*linux-musl*"
+zplug "sharkdp/bat", from:gh-r, as:command, rename-to:bat, use:"*linux-musl*"
+zplug "dandavison/delta", from:gh-r, as:command, rename-to:delta, use:"*x86_64*linux*musl*"
 
 # FZF
 zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf, use:"*linux*amd64*"
 zplug "junegunn/fzf", use:"shell/*.zsh"
-FZF_DEFAULT_COMMAND='fd --type file --hidden --follow'
-FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1'
-FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_COMMAND='fd --type f --color never'
+export FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1 --preview-window=0'
+export FZF_CTRL_T_COMMAND='fd --type f --color never'
+export FZF_ALT_C_COMMAND='fd --type d --color never'
 
 # J
-zplug "rupa/z", use:"*.sh"
+zplug "ajeetdsouza/zoxide", from:gh-r, as:command, rename-to:zoxide, use:"*x86_64*linux*musl*"
+eval "$(zoxide init zsh)"
+# zplug "rupa/z", use:"*.sh"
 # zplug "wting/autojump", use:"bin/autojump", as:command, rename-to:autojump
 
 # Awesome
@@ -49,29 +68,5 @@ fi
 
 # Then, source plugins and add commands to $PATH
 zplug load #--verbose
-
-# Custom
-unalias z 2> /dev/null
-z() {
-  [ $# -gt 0 ] && _z "$*" && return
-  cd "$(_z -l 2>&1 | fzf $FZF_DEFAULT_OPTS --height 40% --reverse --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
-}
-
-# History
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=100000
-SAVEHIST=$HISTSIZE
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt INC_APPEND_HISTORY
-setopt SHARE_HISTORY
-
-# misc
-bindkey \^U backward-kill-line
-
-# completion
-setopt noautomenu
-fpath=(~/.zsh/completion /usr/share/zsh/vendor-completions $fpath)
-autoload -Uz compinit && compinit -i
 
 # vim: sw=2 ts=2 et
