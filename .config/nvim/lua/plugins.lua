@@ -14,16 +14,18 @@ local function init()
   -- Completion and linting and coding
   use { 'neovim/nvim-lspconfig' }
 
-  use { 'wellle/targets.vim' }
+  -- use { 'wellle/targets.vim' }
   use { 'liuchengxu/vista.vim' }
   use { 'editorconfig/editorconfig-vim' }
-  use { '~/github/wwcd/nvim-go', run = ':GoInstall' }
-  use { '~/github/wwcd/nvim-ack' }
+  use { 'wwcd/nvim-ack' }
+  use { 'wwcd/nvim-go', run = ':GoInstall' }
+  use { 'wwcd/nvim-rust', run = ':RustInstall' }
 
   -- Highlights and Color
-  use { '~/github/wwcd/desert' }
+  use { 'wwcd/desert' }
   use { 'nvim-lualine/lualine.nvim' }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', }
+  use { 'nvim-treesitter/nvim-treesitter-textobjects' }
 
   -- FZF
   use { 'junegunn/fzf', dir = '~/.fzf', run = ':call fzf#install()' }

@@ -5,6 +5,7 @@ vim.g.python3_host_prog = '/usr/bin/python3.8'
 
 -- Colorscheme
 vim.cmd [[colorscheme desert]]
+-- vim.o.termguicolors = true
 
 -- Setting
 vim.o.cmdheight = 2
@@ -28,6 +29,7 @@ vim.o.completeopt = [[noinsert,noselect,menuone]]
 vim.o.listchars = [[tab:» ,eol:$,trail:~,extends:>,precedes:<,space:·]]
 vim.o.showmode = false
 vim.o.inccommand = 'split'
+vim.o.mouse = ''
 
 local silent = { silent = true }
 
@@ -112,10 +114,6 @@ vim.g.vista_disable_statusline = true
 vim.g.vista_blink = {0, 0}
 vim.g.vista_ignore_kinds = {'Field'}
 vim.g.vista_icon_indent = {"", "  "}
-
--- ACK
--- vim.g.ackprg = 'rg --vimgrep --no-heading'
--- vim.keymap.set('n', '<leader>ga', function() vim.fn.feedkeys(':Ack! ') end, {silent=true})
 
 -- Lualine
 require('lualine').setup{
@@ -228,6 +226,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- nvim-rust
+require('nvim-rust').setup({})
+
 -- nvim-ack
 require('nvim-ack').setup({})
 vim.keymap.set('n', '<leader>gv', function() vim.fn.feedkeys(':Ack ' .. vim.fn.expand('<cword>') .. ' ') end, {silent=true})
@@ -235,13 +236,26 @@ vim.keymap.set('n', '<leader>ga', function() vim.fn.feedkeys(':Ack ') end, {sile
 
 -- TREE-SITTER
 require('nvim-treesitter.configs').setup({
-  ensure_installed = {
-    'c', 'cpp', 'toml', 'yaml', 'json', 'markdown', 'python', 'go',
-    'gomod', 'gowork', 'bash', 'vim', 'lua', 'make', 'cmake', 'dockerfile',
-    'html', 'css', 'javascript', 'typescript', 'rust'
-  },
+  ensure_installed = 'all',
+  ignore_install = { 'php', 'phpdoc' },
   highlight = { enable = true, },
   incremental_selection = { enable = true, },
   -- indent = { enable = true, },
+  textobjects = {
+    select = {
+      enable = true,
+
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+  },
 })
 
