@@ -1,8 +1,6 @@
 -- Leader
 vim.g.mapleader = ','
 
-vim.g.python3_host_prog = '/usr/bin/python3.8'
-
 -- Colorscheme
 vim.cmd [[colorscheme desert]]
 -- vim.o.termguicolors = true
@@ -51,7 +49,7 @@ vim.keymap.set('n', '<leader>cd', '<cmd>cd %:p:h<cr><cmd>pwd<cr>')
 -- vim.keymap.set('', '<leader>tc', '<cmd>tabclose<cr>')
 
 -- Loclist
-vim.keymap.set('', '<leader>cc', '<cmd>botright cope<cr>')
+vim.keymap.set('', '<leader>cc', '<cmd>botright copen<cr>')
 vim.keymap.set('', '<leader>co', '<cmd>cclose<cr>')
 vim.keymap.set('', '<leader>n', '<cmd>cn<cr>')
 vim.keymap.set('', '<leader>p', '<cmd>cp<cr>')
@@ -212,7 +210,7 @@ require('lspconfig').sumneko_lua.setup({
   on_attach = lsp_attach,
 })
 
--- nvim-go
+-- NVIM-GO
 require('nvim-go').setup({})
 vim.api.nvim_create_augroup('nvim-go', { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
@@ -226,10 +224,19 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- nvim-rust
+-- NVIM-RUST
 require('nvim-rust').setup({})
+vim.api.nvim_create_augroup('nvim-rust', { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	group = 'nvim-rust',
+	pattern = { 'rust' },
+	callback = function()
+    vim.keymap.set('n', '<leader>b', '<cmd>RustBuild<cr>', {buffer=true})
+    vim.keymap.set('n', '<leader>r', '<cmd>RustRun<cr>', {buffer=true})
+	end,
+})
 
--- nvim-ack
+-- NVIM-ACK
 require('nvim-ack').setup({})
 vim.keymap.set('n', '<leader>gv', function() vim.fn.feedkeys(':Ack ' .. vim.fn.expand('<cword>') .. ' ') end, {silent=true})
 vim.keymap.set('n', '<leader>ga', function() vim.fn.feedkeys(':Ack ') end, {silent=true})

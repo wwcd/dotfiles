@@ -1,0 +1,46 @@
+[user]
+    name = wsl
+    email = wang.shoulin1@zte.com.cn
+[alias]
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    changes = diff --name-status -r
+    diffstat = diff --stat -r
+    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+    pwhatis = show -s --pretty='tformat:%h, %s, %ad' --date=short
+    ci = commit
+    co = checkout
+    st = status
+    br = branch
+    di = diff
+    sw = switch
+    cp = cherry-pick
+[core]
+    editor = vim
+[merge]
+    tool = vimdiff
+[mergetool "vimdiff"]
+	path = vim
+[mergetool]
+    prompt = false
+[color]
+    ui = true
+[push]
+	default = simple
+[init]
+	defaultBranch = master
+[credential]
+	helper = store
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none

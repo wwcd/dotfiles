@@ -23,14 +23,20 @@ return {
   },
   insert = {
     a = { fg = colors.lightgreen, bg = colors.white, gui = 'bold' },
+    b = { fg = colors.white, bg = colors.lightgreen },
+    y = { fg = colors.darkgray, bg = colors.gray },
     z = { fg = colors.darkgray, bg = colors.lightwhite },
   },
   visual = {
     a = { fg = colors.lightblue, bg = colors.white, gui = 'bold' },
+    b = { fg = colors.white, bg = colors.lightblue },
+    y = { fg = colors.darkgray, bg = colors.gray },
     z = { fg = colors.darkgray, bg = colors.lightwhite },
   },
   replace = {
     a = { fg = colors.red, bg = colors.white, gui = 'bold' },
+    b = { fg = colors.white, bg = colors.red },
+    y = { fg = colors.darkgray, bg = colors.gray },
     z = { fg = colors.darkgray, bg = colors.lightwhite },
   },
   inactive = {

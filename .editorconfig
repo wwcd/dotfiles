@@ -10,8 +10,8 @@ trim_trailing_whitespace = true
 [{Makefile,go.mod,go.sum,*.go}]
 indent_style = tab
 
-[*.{toml,json,yml,yaml,html,tmpl,js,ts,vim}]
+[*.{toml,json,yml,yaml,html,tmpl,js,ts,vim,lua,toml,sh}]
 indent_size = 2
 
 [*.md]
-trim_trailing_whitespace = false
+indent_size = 2

@@ -13,9 +13,9 @@ fpath=(~/.zsh/completion /usr/share/zsh/vendor-completions $fpath)
 autoload -Uz compinit && compinit -i
 
 # History
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=100000
-SAVEHIST=$HISTSIZE
+export HISTFILE=$HOME/.zsh_history
+export HISTSIZE=100000
+export SAVEHIST=$HISTSIZE
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt INC_APPEND_HISTORY
@@ -23,7 +23,6 @@ setopt SHARE_HISTORY
 
 # misc
 bindkey \^U backward-kill-line
-
 
 # Themes
 zplug "mafredri/zsh-async", from:github, use:"async.zsh"
@@ -37,6 +36,9 @@ zplug "dbrgn/tealdeer", from:gh-r, as:command, rename-to:tldr, use:"*linux*x86_6
 zplug "sharkdp/fd", from:gh-r, as:command, rename-to:fd, use:"*x86_64*linux*musl*"
 zplug "sharkdp/bat", from:gh-r, as:command, rename-to:bat, use:"*linux-musl*"
 zplug "dandavison/delta", from:gh-r, as:command, rename-to:delta, use:"*x86_64*linux*musl*"
+zplug "Peltoche/lsd", from:gh-r, as:command, rename-to:lsd, use:"*x86_64*linux*musl*"
+zplug "bootandy/dust", from:gh-r, as:command, rename-to:dust, use:"*x86_64*linux*musl*"
+zplug "muesli/duf", from:gh-r, as:command, rename-to:duf, use:"*linux_x86_64*"
 
 # FZF
 zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf, use:"*linux*amd64*"
