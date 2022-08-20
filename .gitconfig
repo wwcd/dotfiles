@@ -1,6 +1,6 @@
 [user]
     name = wsl
-    email = wang.shoulin1@zte.com.cn
+    email = shoulinwang@gmail.com
 [alias]
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     changes = diff --name-status -r
