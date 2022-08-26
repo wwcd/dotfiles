@@ -25,9 +25,12 @@ setopt SHARE_HISTORY
 bindkey \^U backward-kill-line
 
 # Themes
-zplug "mafredri/zsh-async", from:github, use:"async.zsh"
-zplug "sindresorhus/pure", from:github, use:"pure.zsh", as:theme
-export PURE_GIT_PULL=1
+zplug "starship/starship", from:gh-r, as:command, rename-to:starship, use:"*x86_64*linux*musl*"
+export STARSHIP_CONFIG=~/.config/starship/config.toml
+eval "$(starship init zsh)"
+# zplug "mafredri/zsh-async", from:github, use:"async.zsh"
+# zplug "sindresorhus/pure", from:github, use:"pure.zsh", as:theme
+# export PURE_GIT_PULL=1
 
 # Tools
 zplug "stedolan/jq", from:gh-r, as:command, rename-to:jq

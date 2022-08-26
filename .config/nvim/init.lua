@@ -166,7 +166,11 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local nvim_lsp = require('lspconfig')
-local servers = { 'pylsp', 'rust_analyzer', 'tsserver', 'cssls', 'html', 'clangd', 'bashls', 'jsonls', 'yamlls', 'gopls', 'taplo', 'lemminx' }
+local servers = {
+  'pylsp', 'rust_analyzer', 'clangd', 'bashls', 'gopls',
+  'cssls', 'html', 'tsserver',
+  'jsonls', 'yamlls', 'taplo', 'lemminx',
+}
 for _, lsp in pairs(servers) do
   nvim_lsp[lsp].setup({
     capabilities = capabilities,
