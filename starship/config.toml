@@ -3,6 +3,7 @@ $username\
 $hostname\
 $directory\
 $git_branch\
+$git_commit\
 $git_state\
 $git_status\
 $cmd_duration\
@@ -10,17 +11,19 @@ $line_break\
 $python\
 $character"""
 
+# command_timeout = 1000
+
 [username]
+format = "[$user]($style)"
 style_user = "bright-black bold"
 style_root = "red bold"
-format = "[$user]($style)"
 disabled = false
 show_always = true
 
 [hostname]
+format = "[$ssh_symbol$hostname]($style) "
 ssh_only = false
 ssh_symbol = "@"
-format = "[$ssh_symbol$hostname]($style) "
 style = "bright-black"
 disabled = false
 
@@ -31,33 +34,36 @@ read_only = ""
 style = "blue"
 
 [character]
+format = "$symbol "
 success_symbol = "[❯](purple)"
 error_symbol = "[❯](red)"
 vicmd_symbol = "[❮](green)"
 
 [git_branch]
-format = "[$branch]($style)"
+format = "[$branch(:$remote_branch)]($style)"
 style = "bright-black"
 
+[git_commit]
+format = "[$hash(@$tag)]($style)"
+style = "bright-black"
+tag_symbol = ""
+
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
+format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](bright-black)( $ahead_behind$stashed)]($style)"
 style = "cyan"
-conflicted = "​"
-untracked = "​"
-modified = "​"
-staged = "​"
-renamed = "​"
-deleted = "​"
 stashed = "≡"
+diverged = "⇡⇣"
+ahead = "⇡"
+behind = "⇣"
 
 [git_state]
-format = '\([$state( $progress_current/$progress_total)]($style)\) '
+format = '\([$state( $progress_current/$progress_total)]($style)\)'
 style = "bright-black"
 
 [cmd_duration]
-format = "[$duration]($style) "
+format = "[( $duration)]($style)"
 style = "yellow"
 
 [python]
-format = "[$virtualenv]($style) "
+format = "[($virtualenv )]($style)"
 style = "bright-black"

@@ -11,3 +11,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/psprint/zplugin/master/doc
 # tmux-tpm
 git clone --depth 1 https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 ```
+
+### 安装
+
+```
+sh install.sh
+```

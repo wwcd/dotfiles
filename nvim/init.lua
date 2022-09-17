@@ -1,6 +1,16 @@
 -- Leader
 vim.g.mapleader = ','
 
+-- Skip some remote provider loading
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+-- Disable some built-in plugins we don't want
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Colorscheme
 vim.cmd [[colorscheme desert]]
 -- vim.o.termguicolors = true
@@ -29,24 +39,24 @@ vim.o.showmode = false
 vim.o.inccommand = 'split'
 vim.o.mouse = ''
 
-local silent = { silent = true }
-
 -- Buffer
-vim.keymap.set('n', '<leader>w', '<cmd>w!<cr>', silent)
-vim.keymap.set('n', '<leader>e', '<cmd>edit %:p:h<cr>', silent)
-vim.keymap.set('n', '<leader>ba', '<cmd>bufdo bd<cr>', silent)
-vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', silent)
-vim.keymap.set('n', '<leader>pp', '<cmd>setlocal paste!<cr>', silent)
-vim.keymap.set('n', '<leader><cr>', '<cmd>noh<cr>', silent)
-vim.keymap.set('v', '>', '>gv', silent)
-vim.keymap.set('v', '<', '<gv', silent)
-vim.keymap.set('n', 'Y', 'y$', silent)
+vim.keymap.set('n', '<leader>w', '<cmd>w!<cr>', {silent=true})
+vim.keymap.set('n', '<leader>e', '<cmd>edit %:p:h<cr>', {silent=true})
+vim.keymap.set('n', '<leader>ba', '<cmd>bufdo bd<cr>', {silent=true})
+vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', {silent=true})
+vim.keymap.set('n', '<leader>pp', '<cmd>setlocal paste!<cr>', {silent=true})
+vim.keymap.set('n', '<leader><cr>', '<cmd>noh<cr>', {silent=true})
+vim.keymap.set('v', '>', '>gv', {silent=true})
+vim.keymap.set('v', '<', '<gv', {silent=true})
+vim.keymap.set('n', 'Y', 'y$', {silent=true})
 vim.keymap.set('n', '<leader>cd', '<cmd>cd %:p:h<cr><cmd>pwd<cr>')
 
 -- Tab
--- vim.keymap.set('', '<leader>tn', '<cmd>tabnew<cr>')
--- vim.keymap.set('', '<leader>to', '<cmd>tabonly<cr>')
--- vim.keymap.set('', '<leader>tc', '<cmd>tabclose<cr>')
+vim.keymap.set('', '<leader>te', '<cmd>tabnew<cr>')
+vim.keymap.set('', '<leader>to', '<cmd>tabonly<cr>')
+vim.keymap.set('', '<leader>tc', '<cmd>tabclose<cr>')
+vim.keymap.set('', '<leader>tn', '<cmd>tabn<cr>')
+vim.keymap.set('', '<leader>tp', '<cmd>tabp<cr>')
 
 -- Loclist
 vim.keymap.set('', '<leader>cc', '<cmd>botright copen<cr>')
@@ -74,11 +84,7 @@ vim.keymap.set('t', '<a-k>', [[<c-\><c-n><c-w>k]])
 vim.keymap.set('t', '<a-l>', [[<c-\><c-n><c-w>l]])
 
 -- PACKER.NVIM
-vim.cmd [[command! PackerInstall packadd packer.nvim | lua require('plugins').install()]]
-vim.cmd [[command! PackerUpdate packadd packer.nvim | lua require('plugins').update()]]
-vim.cmd [[command! PackerSync packadd packer.nvim | lua require('plugins').sync()]]
-vim.cmd [[command! PackerClean packadd packer.nvim | lua require('plugins').clean()]]
-vim.cmd [[command! PackerCompile packadd packer.nvim | lua require('plugins').compile()]]
+require('plugins')
 
 -- FZF
 vim.g.fzf_command_prefix = 'Fzf'
@@ -90,18 +96,29 @@ vim.keymap.set('n', '<leader>fb', '<cmd>FzfBLines<cr>')
 vim.keymap.set('n', '<leader>ff', '<cmd>FzfRg<cr>')
 vim.keymap.set('i', '<c-x><c-k>', '<plug>(fzf-complete-word)', {noremap=false})
 vim.env.FZF_DEFAULT_COMMAND = 'fd --type file --follow --color never'
-vim.env.FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1'
+vim.env.FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1 --preview-window=0'
 
 -- NERDTree
+-- require('nvim-tree').setup({
+--   disable_netrw = true,
+--   hijack_netrw = true,
+--   view = {
+--   },
+--   renderer = {
+--     icons = {
+--       show = { file = false, folder = false, folder_arrow = false, git = false },
+--     }
+--   },
+-- })
+-- vim.keymap.set('n', '<c-n>', '<cmd>NvimTreeToggle<cr>')
 vim.keymap.set('n', '<c-n>', '<cmd>NERDTreeToggle<cr>')
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 vim.g.NERDTreeHighlightCursorline=0
 vim.g.NERDTreeMinimalUI=1
 vim.g.NERDTreeShowLineNumbers=1
 vim.g.NERDTreeDirArrowExpandable='+'
 vim.g.NERDTreeDirArrowCollapsible='-'
 vim.g.NERDTreeStatusline=''
+
 
 -- TAGBAR
 vim.keymap.set('n', '<c-t>', '<cmd>Vista!!<cr>')
@@ -126,7 +143,7 @@ require('lualine').setup{
   extensions={'quickfix', 'nerdtree_c', 'fzf', 'vista_c', 'nvim-tree_c'},
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'FugitiveHead'},
+    lualine_b = {'branch'},
     lualine_c = {{'filename', file_status=true, path=1}},
     lualine_x = {'filetype', 'fileformat', 'encoding'},
     lualine_y = {'progress'},
@@ -138,28 +155,23 @@ require('lualine').setup{
 -- LSP
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- Disable signs
     signs = false,
     underline = false,
   }
 )
 local lsp_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true, buffer=bufnr }
+
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', ';f', vim.lsp.buf.formatting, opts)
+  vim.keymap.set('n', ';f', function() vim.lsp.buf.format({ async = true }) end, opts)
   vim.keymap.set('n', ';r', vim.lsp.buf.rename, opts)
   vim.keymap.set('n', ';ca', vim.lsp.buf.code_action, opts)
   vim.keymap.set('n', ';d', vim.diagnostic.setloclist, opts)
 
-  -- Use LSP as the handler for omnifunc.
-  --    See `:help omnifunc` and `:help ins-completion` for more information.
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- For plugins with an `on_attach` callback, call them here. For example:
-  -- require('completion').on_attach()
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -167,77 +179,55 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local nvim_lsp = require('lspconfig')
 local servers = {
-  'pylsp', 'rust_analyzer', 'clangd', 'bashls', 'gopls',
-  'cssls', 'html', 'tsserver',
-  'jsonls', 'yamlls', 'taplo', 'lemminx',
+  pyright = { settings = { python = { formatting = { provider = 'yapf' } } } },
+  rust_analyzer = {},
+  clangd = {},
+  bashls = {},
+  gopls = {},
+  cssls = {},
+  html = {},
+  tsserver = {},
+  jsonls = {},
+  yamlls = {},
+  taplo = {},
+  lemminx = {},
 }
-for _, lsp in pairs(servers) do
-  nvim_lsp[lsp].setup({
+for server, config in pairs(servers) do
+  nvim_lsp[server].setup(vim.tbl_deep_extend('force', {
     capabilities = capabilities,
     on_attach = lsp_attach,
     flags = {
       debounce_text_changes = 150,
     }
-  })
+  }, config))
 end
 
--- set the path to the sumneko installation
-local sumneko_root_path = '/home/wsl/.local/share/sumneko/bin'
-local sumneko_binary = sumneko_root_path .. "/lua-language-server"
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-require('lspconfig').sumneko_lua.setup({
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
-  -- An example of settings for an LSP server.
-  --    For more options, see nvim-lspconfig
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-    }
-  },
-
-  on_attach = lsp_attach,
-})
+-- AUTOPAIR
+require("nvim-autopairs").setup({})
 
 -- NVIM-GO
 require('nvim-go').setup({})
 vim.api.nvim_create_augroup('nvim-go', { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-	group = 'nvim-go',
-	pattern = { 'go' },
-	callback = function()
+  group = 'nvim-go',
+  pattern = { 'go' },
+  callback = function()
     vim.keymap.set('n', '<leader>b', '<cmd>GoBuild<cr>', {buffer=true})
     vim.keymap.set('n', '<leader>r', '<cmd>GoRun<cr>', {buffer=true})
-    vim.keymap.set('n', '<leader>t', '<cmd>GoTest<cr>', {buffer=true})
     vim.keymap.set('n', '<leader><tab>', '<cmd>GoIferr<cr>', {buffer=true})
-	end,
+  end,
 })
 
 -- NVIM-RUST
 require('nvim-rust').setup({})
 vim.api.nvim_create_augroup('nvim-rust', { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-	group = 'nvim-rust',
-	pattern = { 'rust' },
-	callback = function()
+  group = 'nvim-rust',
+  pattern = { 'rust' },
+  callback = function()
     vim.keymap.set('n', '<leader>b', '<cmd>RustBuild<cr>', {buffer=true})
     vim.keymap.set('n', '<leader>r', '<cmd>RustRun<cr>', {buffer=true})
-	end,
+  end,
 })
 
 -- NVIM-ACK
@@ -251,7 +241,7 @@ require('nvim-treesitter.configs').setup({
   ignore_install = { 'php', 'phpdoc' },
   highlight = { enable = true, },
   incremental_selection = { enable = true, },
-  -- indent = { enable = true, },
+  indent = { enable = true, },
   textobjects = {
     select = {
       enable = true,
@@ -268,5 +258,7 @@ require('nvim-treesitter.configs').setup({
       },
     },
   },
+  playground = {
+    enable = true,
+  }
 })
-

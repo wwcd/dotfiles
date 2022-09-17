@@ -28,24 +28,20 @@ bindkey \^U backward-kill-line
 zplug "starship/starship", from:gh-r, as:command, rename-to:starship, use:"*x86_64*linux*musl*"
 export STARSHIP_CONFIG=~/.config/starship/config.toml
 eval "$(starship init zsh)"
-# zplug "mafredri/zsh-async", from:github, use:"async.zsh"
-# zplug "sindresorhus/pure", from:github, use:"pure.zsh", as:theme
-# export PURE_GIT_PULL=1
 
 # Tools
 zplug "stedolan/jq", from:gh-r, as:command, rename-to:jq
-zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg, use:"*x86_64*musl*"
+zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg, use:"*x86_64*linux*musl*"
 zplug "dbrgn/tealdeer", from:gh-r, as:command, rename-to:tldr, use:"*linux*x86_64*musl"
 zplug "sharkdp/fd", from:gh-r, as:command, rename-to:fd, use:"*x86_64*linux*musl*"
-zplug "sharkdp/bat", from:gh-r, as:command, rename-to:bat, use:"*linux-musl*"
+zplug "sharkdp/bat", from:gh-r, as:command, rename-to:bat, use:"*x86_64*linux*musl*"
 zplug "dandavison/delta", from:gh-r, as:command, rename-to:delta, use:"*x86_64*linux*musl*"
 zplug "Peltoche/lsd", from:gh-r, as:command, rename-to:lsd, use:"*x86_64*linux*musl*"
 zplug "bootandy/dust", from:gh-r, as:command, rename-to:dust, use:"*x86_64*linux*musl*"
 zplug "muesli/duf", from:gh-r, as:command, rename-to:duf, use:"*linux_x86_64*"
 
 # FZF
-zplug "junegunn/fzf-bin", from:gh-r, as:command, rename-to:fzf, use:"*linux*amd64*"
-zplug "junegunn/fzf", use:"shell/*.zsh"
+zplug "junegunn/fzf", hook-build:"sh -x install", use:"shell/*.zsh"
 export FZF_DEFAULT_COMMAND='fd --type f --color never'
 export FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1 --preview-window=0'
 export FZF_CTRL_T_COMMAND='fd --type f --color never'
