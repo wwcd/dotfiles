@@ -44,9 +44,10 @@ format = "[$branch(:$remote_branch)]($style)"
 style = "bright-black"
 
 [git_commit]
-format = "[$hash(@$tag)]($style)"
+format = "[$hash($tag)]($style)"
 style = "bright-black"
-tag_symbol = ""
+tag_symbol = " tag:"
+tag_disabled = false
 
 [git_status]
 format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](bright-black)( $ahead_behind$stashed)]($style)"

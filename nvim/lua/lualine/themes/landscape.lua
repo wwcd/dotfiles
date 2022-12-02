@@ -8,8 +8,8 @@ local colors = {
   red        = '#af0000',
   blue       = '#0000cd',
   lightblue  = '#5f00ff',
-  gray       = '#8a8a8a',
-  darkgray   = '#3a3a3a',
+  gray       = '#5c6370',
+  darkgray   = '#31353f',
   lightgreen = '#005f00',
 }
 

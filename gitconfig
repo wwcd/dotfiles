@@ -5,8 +5,8 @@
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     changes = diff --name-status -r
     diffstat = diff --stat -r
-    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
-    pwhatis = show -s --pretty='tformat:%h, %s, %ad' --date=short
+    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=iso
+    pwhatis = show -s --pretty='tformat:%h, %s, %ad' --date=iso
     ci = commit
     co = checkout
     st = status
@@ -16,8 +16,6 @@
     d = diff
     sw = switch
     cp = cherry-pick
-[core]
-    editor = vim
 [merge]
     tool = vimdiff
 [mergetool "vimdiff"]
@@ -28,7 +26,14 @@
     ui = true
 [push]
 	default = simple
-[init]
-	defaultBranch = master
 [credential]
 	helper = store
+[core]
+    editor = vim
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+[delta]
+    side-by-side = true
+[delta "interactive"]
+    keep-plus-minus-markers = false

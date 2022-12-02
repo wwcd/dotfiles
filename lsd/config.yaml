@@ -4,3 +4,5 @@ icons:
   theme: unicode
 size: short
 symlink-arrow: ->
+sorting:
+  dir-grouping: first

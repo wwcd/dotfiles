@@ -1,15 +1,15 @@
 -- Copyright (c) 2020-2021 hoob3rt
 -- MIT license, see LICENSE for more details.
-local function vista_statusline()
-  return 'TAGLIST'
+local function outline_statusline()
+  return 'OUTLINE'
 end
 
 local M = {}
 
 M.sections = {
-  lualine_a = { vista_statusline },
+  lualine_a = { outline_statusline },
 }
 
-M.filetypes = { 'vista_kind' }
+M.filetypes = { 'aerial' }
 
 return M
