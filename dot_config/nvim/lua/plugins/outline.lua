@@ -1,0 +1,17 @@
+return {
+  'wwcd/aerial.nvim',
+  config = function()
+    require('aerial').setup({
+      lazy_load = false,
+      highlight_mode = 'none',
+      highlight_on_jump = false,
+      layout = {
+        default_direction = 'left',
+        min_width = 30,
+      },
+    })
+
+    vim.keymap.set('n', '<c-t>', '<cmd>AerialToggle<cr>')
+    vim.keymap.set('n', '<c-g>', '<cmd>call aerial#fzf()<cr>')
+  end
+}

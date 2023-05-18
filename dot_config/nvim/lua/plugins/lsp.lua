@@ -1,0 +1,110 @@
+return {
+  'neovim/nvim-lspconfig',
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'jose-elias-alvarez/null-ls.nvim',
+    'williamboman/mason.nvim',
+    "williamboman/mason-lspconfig.nvim",
+  },
+  config = function()
+    vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
+      vim.lsp.diagnostic.on_publish_diagnostics, {
+        signs = false,
+        underline = false,
+      }
+    )
+    local lsp_attach = function(_, bufnr)
+      local opts = { noremap = true, silent = true, buffer = bufnr }
+
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+      vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+      vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+      vim.keymap.set('n', ';f', function() vim.lsp.buf.format({ async = true }) end, opts)
+      vim.keymap.set('n', ';r', vim.lsp.buf.rename, opts)
+      vim.keymap.set('n', ';a', vim.lsp.buf.code_action, opts)
+      vim.keymap.set('n', ';d', vim.diagnostic.setloclist, opts)
+
+      vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+      -- vim.api.nvim_buf_set_option(bufnr, 'tagfunc', 'v:lua.vim.lsp.tagfunc')
+      -- vim.api.nvim_buf_set_option(bufnr, 'formatexpr', 'v:lua.vim.lsp.formatexpr()')
+    end
+
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+    local nvim_lsp = require('lspconfig')
+    local servers = {
+      pyright = { settings = { python = { formatting = { provider = 'yapf' } } } },
+      rust_analyzer = {},
+      clangd = { cmd = { 'clangd', '--clang-tidy' } },
+      bashls = { filetypes = { 'sh', 'zsh' } },
+      gopls = {
+        settings = {
+          gopls = {
+            templateExtensions = { 'gotmpl' },
+            gofumpt = true,
+            codelenses = {
+              test = true,
+              run_govulncheck = true,
+              tidy = true,
+              vendor = true,
+              upgrade_dependency = true,
+            },
+          }
+        }
+      },
+      lua_ls = {
+        settings = {
+          Lua = {
+            runtime = {
+              version = 'LuaJIT',
+            },
+            diagnostics = {
+              globals = { 'vim' },
+            },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file('', true),
+              checkThirdParty = false,
+            },
+            telemetry = {
+              enable = false,
+            },
+          }
+        },
+      },
+      cssls = {},
+      html = {},
+      tsserver = {},
+      jsonls = {},
+      helm_ls = {},
+      -- yamlls = { settings = { yaml = { formmtting = { provider = 'yamlfmt' } } } },
+      taplo = {},
+      lemminx = {},
+    }
+    for server, config in pairs(servers) do
+      nvim_lsp[server].setup(vim.tbl_deep_extend('force', {
+        capabilities = capabilities,
+        on_attach = lsp_attach,
+        flags = {
+          debounce_text_changes = 150,
+        }
+      }, config))
+    end
+
+    require('null-ls').setup({
+      sources = {
+        require('null-ls').builtins.formatting.yapf,
+        require('null-ls').builtins.formatting.beautysh,
+        require('null-ls').builtins.formatting.yamlfmt,
+      }
+    })
+
+    require("mason").setup({})
+    require("mason-lspconfig").setup({
+      ensure_installed = {
+        "lua_ls", "pyright", "bashls", "cssls", "html", "jsonls", "yamlls", "taplo", "lemminx",
+      },
+    })
+  end
+}
