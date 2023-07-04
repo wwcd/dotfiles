@@ -9,9 +9,9 @@ return {
   config = function()
     vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
-        signs = false,
-        underline = false,
-      }
+      signs = false,
+      underline = false,
+    }
     )
     local lsp_attach = function(_, bufnr)
       local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -51,6 +51,15 @@ return {
               vendor = true,
               upgrade_dependency = true,
             },
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            }
           }
         }
       },
@@ -77,8 +86,7 @@ return {
       html = {},
       tsserver = {},
       jsonls = {},
-      helm_ls = {},
-      -- yamlls = { settings = { yaml = { formmtting = { provider = 'yamlfmt' } } } },
+      -- yamlls = { settings = { yaml = { formatting = { provider = 'yamlfmt' } } } },
       taplo = {},
       lemminx = {},
     }

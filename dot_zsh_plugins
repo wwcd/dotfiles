@@ -63,7 +63,7 @@ zinit lucid from"gh-r" as"null" for completions cp"**/autocomplete/_fd -> _fd" s
 zinit lucid from"gh-r" as"null" for completions cp"**/autocomplete/bat.zsh -> _bat" sbin"**/bat" @sharkdp/bat
 zinit lucid from"gh-r" as"null" for completions cp"**/complete/_rg -> _rg" sbin"**/rg" @burntsushi/ripgrep
 zinit lucid from"gh-r" as"null" for completions atpull"%atclone" atclone"procs --gen-completion zsh" sbin"**/procs" @dalance/procs
-zinit lucid from"gh-r" as"null" for sbin"**/jq* -> jq" @stedolan/jq
+zinit lucid from"gh-r" as"null" for sbin"**/jq* -> jq" @jqlang/jq
 zinit lucid from"gh-r" as"null" for sbin"**/tokei* -> tokei" @xampprocky/tokei
 
 # Awesome
