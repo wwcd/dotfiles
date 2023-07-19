@@ -1,10 +1,7 @@
 return {
   {
-    'junegunn/fzf',
-    build = ':call fzf#install()'
-  },
-  {
     'junegunn/fzf.vim',
+    dependencies = { 'junegunn/fzf', build = ':call fzf#install()' },
     init = function()
       vim.g.fzf_command_prefix = 'Fzf'
       vim.g.fzf_preview_window = ''

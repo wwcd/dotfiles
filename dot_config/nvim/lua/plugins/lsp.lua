@@ -33,7 +33,7 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-    local nvim_lsp = require('lspconfig')
+    local lspconfig = require('lspconfig')
     local servers = {
       pyright = { settings = { python = { formatting = { provider = 'yapf' } } } },
       rust_analyzer = {},
@@ -91,7 +91,7 @@ return {
       lemminx = {},
     }
     for server, config in pairs(servers) do
-      nvim_lsp[server].setup(vim.tbl_deep_extend('force', {
+      lspconfig[server].setup(vim.tbl_deep_extend('force', {
         capabilities = capabilities,
         on_attach = lsp_attach,
         flags = {
