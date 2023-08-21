@@ -47,7 +47,7 @@ eval "$(zoxide init zsh)"
 
 # FZF
 export FZF_DEFAULT_COMMAND='fd --type f --color never'
-export FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1 --preview-window=0 --no-separator --prompt="❯ " --pointer="●"'
+export FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1 --preview-window=0 --no-separator --prompt="❯ " --pointer=">"'
 export FZF_CTRL_T_COMMAND='fd --type f --color never'
 export FZF_ALT_C_COMMAND='fd --type d --color never'
 zinit lucid from"gh-r" as"null" for completions dl"https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf" sbin"**/fzf" @junegunn/fzf
@@ -63,6 +63,7 @@ zinit lucid from"gh-r" as"null" for completions cp"**/autocomplete/_fd -> _fd" s
 zinit lucid from"gh-r" as"null" for completions cp"**/autocomplete/bat.zsh -> _bat" sbin"**/bat" @sharkdp/bat
 zinit lucid from"gh-r" as"null" for completions cp"**/complete/_rg -> _rg" sbin"**/rg" @burntsushi/ripgrep
 zinit lucid from"gh-r" as"null" for completions atpull"%atclone" atclone"procs --gen-completion zsh" sbin"**/procs" @dalance/procs
+zinit lucid from"gh-r" as"null" for completions atpull"%atclone" atclone"yq shell-completions zsh > _yq" sbin"**/yq* -> yq" @mikefarah/yq
 zinit lucid from"gh-r" as"null" for sbin"**/jq* -> jq" @jqlang/jq
 zinit lucid from"gh-r" as"null" for sbin"**/tokei* -> tokei" @xampprocky/tokei
 

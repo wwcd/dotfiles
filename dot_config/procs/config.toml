@@ -137,7 +137,7 @@ nonnumeric_search = false
 align = "Left"
 
 [[columns]]
-kind = "Command"
+kind = "FileName"
 style = "BrightWhite|Black"
 numeric_search = false
 nonnumeric_search = true

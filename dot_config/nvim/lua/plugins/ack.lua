@@ -6,8 +6,7 @@ return {
       function()
         vim.fn.feedkeys(':Ack ' .. vim.fn.expand('<cword>') .. ' ')
       end,
-      { silent = true }
-    )
+      { silent = true })
     vim.keymap.set('v', 'gv',
       function()
         vim.fn.feedkeys(':Ack ' .. require('nvim-ack.utils').get_visual_selection() .. ' ', 'i')

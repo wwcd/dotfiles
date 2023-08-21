@@ -19,15 +19,15 @@
 [merge]
     tool = vimdiff
 [mergetool "vimdiff"]
-	path = vim
+    path = vim
 [mergetool]
     prompt = false
 [color]
     ui = true
 [push]
-	default = simple
+    default = simple
 [credential]
-	helper = store
+    helper = store
 [core]
     editor = vim
     pager = delta
@@ -35,5 +35,6 @@
     diffFilter = delta --color-only --features=interactive
 [delta]
     side-by-side = true
+    tabs = 2
 [delta "interactive"]
     keep-plus-minus-markers = false

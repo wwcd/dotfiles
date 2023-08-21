@@ -74,7 +74,8 @@ return {
       end
     end
 
-    vim.keymap.set('n', '<c-n>', '<cmd>NvimTreeToggle<cr>')
+    vim.keymap.set('n', ';e', '<cmd>NvimTreeToggle<cr>')
+    vim.keymap.set('n', '<F10>', '<cmd>NvimTreeToggle<cr>')
     vim.keymap.set('n', '<leader>e', function() toggle_replace() end, { silent = true })
   end
 }

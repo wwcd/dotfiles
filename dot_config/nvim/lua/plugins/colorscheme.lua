@@ -5,7 +5,7 @@ return {
       transparent = true,
       highlights = {
         QuickFixLine = { fmt = 'none' }
-      }
+      },
     })
     require('onedark').load()
   end
