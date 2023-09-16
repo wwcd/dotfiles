@@ -3,7 +3,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter.configs').setup({
+      require 'nvim-treesitter.configs'.setup({
         ensure_installed = 'all',
         ignore_install = { 'wgsl', 'wgsl_bevy', 'gleam', 'smali' },
         highlight = {
@@ -30,7 +30,8 @@ return {
           enable = true,
         }
       })
-      require 'nvim-treesitter.parsers'.get_parser_configs().gotmpl = {
+      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+      parser_config.gotmpl = {
         install_info = {
           url = 'https://github.com/wwcd/tree-sitter-go-template',
           branch = 'master',
@@ -39,7 +40,7 @@ return {
         filetype = 'gotmpl',
         used_by = { 'gohtmltmpl', 'gotexttmpl', 'gotmpl' }
       }
-      require 'nvim-treesitter.parsers'.get_parser_configs().jinja2 = {
+      parser_config.jinja2 = {
         install_info = {
           url = 'https://github.com/theHamsta/tree-sitter-jinja2',
           branch = 'master',

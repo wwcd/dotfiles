@@ -21,6 +21,7 @@ return {
       hijack_netrw = true,
       hijack_unnamed_buffer_when_opening = true,
       renderer = {
+        special_files = {},
         icons = {
           webdev_colors = false,
           symlink_arrow = ' -> ',
@@ -52,7 +53,7 @@ return {
       },
       actions = {
         change_dir = {
-          enable = true,
+          enable = false,
           restrict_above_cwd = false,
         },
       },

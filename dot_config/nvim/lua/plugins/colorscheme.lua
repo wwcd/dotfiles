@@ -4,6 +4,7 @@ return {
     require('onedark').setup({
       transparent = true,
       highlights = {
+        ["@text.uri"] = { fmt = 'none' },
         QuickFixLine = { fmt = 'none' }
       },
     })

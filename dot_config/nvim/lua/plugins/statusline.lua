@@ -8,7 +8,7 @@ end
 
 local function lsp_status()
   local message = vim.lsp.status()
-  message = message:gsub("^([^,]+).*", "%1")
+  message = message:gsub('%%', '%%%%'):gsub(':', '%:'):gsub("^([^,]+).*", "%1")
   return message:sub(0, 48)
 end
 
