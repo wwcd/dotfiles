@@ -33,6 +33,8 @@ vim.opt.showmode = false
 vim.opt.mouse = ''
 vim.opt.inccommand = 'split'
 vim.opt.splitkeep = 'screen'
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 vim.opt.diffopt:append('linematch:60')
 vim.opt.diffopt:append('iwhite')
 

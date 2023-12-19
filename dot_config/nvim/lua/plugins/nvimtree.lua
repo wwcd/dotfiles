@@ -63,20 +63,8 @@ return {
       on_attach = on_attach,
     })
 
-    local function toggle_replace()
-      local view = require "nvim-tree.view"
-      if view.is_visible() then
-        view.close()
-      end
-      if vim.api.nvim_buf_get_name(0) == "" then
-        vim.cmd(':edit %:p:h')
-      else
-        require "nvim-tree".open_replacing_current_buffer()
-      end
-    end
-
     vim.keymap.set('n', ';e', '<cmd>NvimTreeToggle<cr>')
     vim.keymap.set('n', '<F10>', '<cmd>NvimTreeToggle<cr>')
-    vim.keymap.set('n', '<leader>e', function() toggle_replace() end, { silent = true })
+    vim.keymap.set('n', '<leader>e', function() vim.cmd(':edit %:p:h') end, { silent = true })
   end
 }

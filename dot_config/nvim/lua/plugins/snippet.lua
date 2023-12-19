@@ -1,9 +1,10 @@
 return {
   'l3mon4d3/luasnip',
   dependencies = {
-    { 'rafamadriz/friendly-snippets' },
-    { 'wwcd/nvim-snippets' },
+    'rafamadriz/friendly-snippets',
+    'wwcd/nvim-snippets',
   },
+  event = "InsertEnter",
   config = function()
     require('luasnip.loaders.from_vscode').lazy_load()
     vim.keymap.set('i', '<Tab>', function()
