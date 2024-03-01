@@ -7,6 +7,7 @@ return {
       transparent = true,
       highlights = {
         ["@text.uri"] = { fmt = 'none' },
+        ["@string.special.url"] = { fmt = 'none' },
         QuickFixLine = { fmt = 'none' }
       },
     })

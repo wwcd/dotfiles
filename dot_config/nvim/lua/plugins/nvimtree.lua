@@ -66,5 +66,8 @@ return {
     vim.keymap.set('n', ';e', '<cmd>NvimTreeToggle<cr>')
     vim.keymap.set('n', '<F10>', '<cmd>NvimTreeToggle<cr>')
     vim.keymap.set('n', '<leader>e', function() vim.cmd(':edit %:p:h') end, { silent = true })
+    vim.cmd([[
+      :hi NvimTreeExecFile  guisp=#e5c07b
+    ]])
   end
 }
