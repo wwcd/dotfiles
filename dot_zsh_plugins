@@ -2,10 +2,10 @@
 
 # zinit bootstrap
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git"
+  command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+  command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git"
 fi
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh" && unalias zi
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
@@ -37,7 +37,7 @@ bindkey \^U backward-kill-line
 
 # Themes
 export STARSHIP_CONFIG=~/.config/starship/config.toml
-zinit lucid from"gh-r" as"null" for completions atpull"%atclone" atclone"starship completions zsh > _starship" sbin"**/starship" @starship/starship
+zinit lucid from"gh-r" as"null" for sbin"**/starship" @starship/starship
 eval "$(starship init zsh)"
 
 # Autojump
@@ -50,20 +50,20 @@ export FZF_DEFAULT_COMMAND='fd --type f --color never'
 export FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1 --preview-window=0 --no-separator --prompt="❯ " --pointer=">"'
 export FZF_CTRL_T_COMMAND='fd --type f --color never'
 export FZF_ALT_C_COMMAND='fd --type d --color never'
-zinit lucid from"gh-r" as"null" for completions dl"https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh -> _fzf" sbin"**/fzf" @junegunn/fzf
+zinit lucid from"gh-r" as"null" for sbin"**/fzf" @junegunn/fzf
 zinit for https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
 
 # Tools
-zinit lucid from"gh-r" as"null" for completions dl"https://raw.githubusercontent.com/dbrgn/tealdeer/main/completion/zsh_tealdeer -> _tldr" sbin"**/tealdeer* -> tldr" @dbrgn/tealdeer
-zinit lucid from"gh-r" as"null" for completions atload"alias di='delta --side-by-side'" dl"https://raw.githubusercontent.com/dandavison/delta/master/etc/completion/completion.zsh -> _delta" sbin"**/delta" @dandavison/delta
-zinit lucid from"gh-r" as"null" for completions atload"alias ls=lsd" cp"**/autocomplete/_lsd -> _lsd" @lsd-rs/lsd
-zinit lucid from"gh-r" as"null" for completions dl"https://raw.githubusercontent.com/bootandy/dust/master/completions/_dust -> _dust" sbin"**/dust" @bootandy/dust
+zinit lucid from"gh-r" as"null" for sbin"**/tealdeer* -> tldr" @dbrgn/tealdeer
+zinit lucid from"gh-r" as"null" for sbin"**/delta" @dandavison/delta
+zinit lucid from"gh-r" as"null" atload"alias ls=lsd" for sbin"**/lsd" @lsd-rs/lsd
+zinit lucid from"gh-r" as"null" for sbin"**/dust" @bootandy/dust
 zinit lucid from"gh-r" as"null" for sbin"**/duf" @muesli/duf
-zinit lucid from"gh-r" as"null" for completions cp"**/autocomplete/_fd -> _fd" sbin"**/fd" @sharkdp/fd
-zinit lucid from"gh-r" as"null" for completions cp"**/autocomplete/bat.zsh -> _bat" sbin"**/bat" @sharkdp/bat
-zinit lucid from"gh-r" as"null" for completions cp"**/complete/_rg -> _rg" sbin"**/rg" @burntsushi/ripgrep
-zinit lucid from"gh-r" as"null" for completions atpull"%atclone" atclone"procs --gen-completion zsh" sbin"**/procs" @dalance/procs
-zinit lucid from"gh-r" as"null" for completions atpull"%atclone" atclone"yq shell-completions zsh > _yq" sbin"**/yq* -> yq" @mikefarah/yq
+zinit lucid from"gh-r" as"null" for sbin"**/fd" @sharkdp/fd
+zinit lucid from"gh-r" as"null" for sbin"**/bat" @sharkdp/bat
+zinit lucid from"gh-r" as"null" for sbin"**/rg" @burntsushi/ripgrep
+zinit lucid from"gh-r" as"null" for sbin"**/procs" @dalance/procs
+zinit lucid from"gh-r" as"null" for sbin"**/yq* -> yq" @mikefarah/yq
 zinit lucid from"gh-r" as"null" for sbin"**/jq* -> jq" @jqlang/jq
 zinit lucid from"gh-r" as"null" for sbin"**/tokei* -> tokei" @xampprocky/tokei
 

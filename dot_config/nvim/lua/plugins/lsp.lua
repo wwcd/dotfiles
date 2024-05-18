@@ -86,7 +86,7 @@ return {
       html = {},
       tsserver = {},
       jsonls = {},
-      -- yamlls = { settings = { yaml = { formatting = { provider = 'yamlfmt' } } } },
+      yamlls = { settings = { yaml = { formatting = { provider = 'yamlfmt' } } } },
       taplo = {},
       lemminx = {},
     }
@@ -102,6 +102,7 @@ return {
 
     require('null-ls').setup({
       sources = {
+        require('null-ls').builtins.formatting.shfmt,
         require('null-ls').builtins.formatting.yapf,
         require('null-ls').builtins.formatting.yamlfmt,
       }
