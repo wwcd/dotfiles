@@ -13,21 +13,30 @@ return {
         underline = false,
       }
     )
-    local lsp_attach = function(_, bufnr)
+
+
+    local lsp_attach = function(client, bufnr)
       local opts = { noremap = true, silent = true, buffer = bufnr }
 
+      -- "grn" is mapped in Normal mode to vim.lsp.buf.rename()
+      -- "gra" is mapped in Normal and Visual mode to vim.lsp.buf.code_action()
+      -- "grr" is mapped in Normal mode to vim.lsp.buf.references()
+      -- CTRL-S is mapped in Insert mode to vim.lsp.buf.signature_help()
+
+      vim.keymap.set('n', ';r', vim.lsp.buf.references, opts)
+      vim.keymap.set('n', ';n', vim.lsp.buf.rename, opts)
+      vim.keymap.set('n', ';a', vim.lsp.buf.code_action, opts)
       vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-      vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-      vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+      vim.keymap.set('n', ';i', vim.lsp.buf.implementation, opts)
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
       vim.keymap.set('n', ';f', function() vim.lsp.buf.format({ async = true }) end, opts)
-      vim.keymap.set('n', ';r', vim.lsp.buf.rename, opts)
-      vim.keymap.set('n', ';a', vim.lsp.buf.code_action, opts)
       vim.keymap.set('n', ';d', vim.diagnostic.setloclist, opts)
 
       vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr })
-      -- vim.api.nvim_set_option_value('tagfunc', 'v:lua.vim.lsp.tagfunc', { buf = bufnr })
-      -- vim.api.nvim_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()', { buf = bufnr })
+
+      vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+      vim.api.nvim_set_option_value('tagfunc', 'v:lua.vim.lsp.tagfunc', { buf = bufnr })
+      vim.api.nvim_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()', { buf = bufnr })
     end
 
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -98,6 +107,8 @@ return {
           debounce_text_changes = 150,
         }
       }, config))
+
+      vim.env.SHELLCHECK_OPTS = '-e SC2086'
     end
 
     require('null-ls').setup({
@@ -111,7 +122,7 @@ return {
     require("mason").setup({})
     require("mason-lspconfig").setup({
       ensure_installed = {
-        "lua_ls", "pyright", "bashls", "cssls", "html", "jsonls", "yamlls", "taplo", "lemminx",
+        "lua_ls", "pyright", "bashls", "cssls", "html", "jsonls", "yamlls", "taplo", "lemminx", "tsserver", "bashls"
       },
     })
   end

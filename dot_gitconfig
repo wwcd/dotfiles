@@ -31,6 +31,7 @@
 [core]
     editor = vim
     pager = delta
+    autocrlf = false
 [interactive]
     diffFilter = delta --color-only --features=interactive
 [delta]
