@@ -1,5 +1,6 @@
 return {
   'wwcd/aerial.nvim',
+  -- dir = "/home/wsl/github/wwcd/aerial.nvim",
   config = function()
     require('aerial').setup({
       lazy_load = false,

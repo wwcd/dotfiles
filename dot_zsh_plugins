@@ -5,9 +5,13 @@ if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
   command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
   command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git"
 fi
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh" && unalias zi
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
+# disable zi alias
+if whence -w zi | grep "alias" &>/dev/null; then
+  unalias zi
+fi
 
 # zinit annex
 zinit light-mode for zdharma-continuum/zinit-annex-bin-gem-node
@@ -61,6 +65,7 @@ zinit lucid from"gh-r" as"null" for sbin"**/dust" @bootandy/dust
 zinit lucid from"gh-r" as"null" for sbin"**/duf" @muesli/duf
 zinit lucid from"gh-r" as"null" for sbin"**/fd" @sharkdp/fd
 zinit lucid from"gh-r" as"null" for sbin"**/bat" @sharkdp/bat
+zinit lucid from"gh-r" as"null" for sbin"**/sd" @chmln/sd
 zinit lucid from"gh-r" as"null" for sbin"**/rg" @burntsushi/ripgrep
 zinit lucid from"gh-r" as"null" for sbin"**/procs" @dalance/procs
 zinit lucid from"gh-r" as"null" for sbin"**/yq* -> yq" @mikefarah/yq

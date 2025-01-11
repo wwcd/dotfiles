@@ -93,7 +93,7 @@ return {
       },
       cssls = {},
       html = {},
-      tsserver = {},
+      ts_ls = {},
       jsonls = {},
       yamlls = { settings = { yaml = { formatting = { provider = 'yamlfmt' } } } },
       taplo = {},
@@ -122,7 +122,7 @@ return {
     require("mason").setup({})
     require("mason-lspconfig").setup({
       ensure_installed = {
-        "lua_ls", "pyright", "bashls", "cssls", "html", "jsonls", "yamlls", "taplo", "lemminx", "tsserver", "bashls"
+        "lua_ls", "pyright", "bashls", "cssls", "html", "jsonls", "yamlls", "taplo", "lemminx", "ts_ls", "bashls"
       },
     })
   end
