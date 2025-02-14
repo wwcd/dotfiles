@@ -38,6 +38,7 @@ setopt SHARE_HISTORY
 
 # misc
 bindkey \^U backward-kill-line
+unsetopt BEEP
 
 # Themes
 export STARSHIP_CONFIG=~/.config/starship/config.toml

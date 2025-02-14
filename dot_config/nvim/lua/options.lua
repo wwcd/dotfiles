@@ -7,10 +7,6 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
--- Disable some built-in plugins we don't want
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 -- Setting
 vim.opt.cmdheight = 2
 vim.opt.showmatch = true
@@ -40,5 +36,6 @@ vim.opt.splitbelow = true
 vim.opt.diffopt:append('linematch:60')
 vim.opt.diffopt:append('iwhite')
 
--- Enable lua cache
+-- Misc
 vim.loader.enable()
+vim.diagnostic.config({ signs = true, underline = false, virtual_text = { prefix = '●' }, })

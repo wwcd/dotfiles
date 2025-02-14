@@ -35,7 +35,10 @@
 [interactive]
     diffFilter = delta --color-only --features=interactive
 [delta]
+    navigate = true
     side-by-side = true
     tabs = 2
 [delta "interactive"]
     keep-plus-minus-markers = false
+[http]
+	sslVerify = false
