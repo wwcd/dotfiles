@@ -25,6 +25,8 @@ return {
           'javascript',
           'json',
           'jsonc',
+          'jinja',
+          'jinja_inline',
           -- 'lua',
           'luadoc',
           'make',
@@ -70,17 +72,10 @@ return {
           enable = true,
         }
       })
-      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-      parser_config.jinja2 = {
-        install_info = {
-          url = 'https://github.com/theHamsta/tree-sitter-jinja2',
-          branch = 'master',
-          files = { 'src/parser.c' }
-        },
-        filetype = 'jinja2',
-        used_by = { 'jinja2' }
-      }
     end
   },
-  { 'nvim-treesitter/nvim-treesitter-textobjects' },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    event = "VeryLazy",
+  },
 }

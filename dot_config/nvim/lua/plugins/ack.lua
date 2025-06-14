@@ -1,5 +1,6 @@
 return {
   'wwcd/nvim-ack',
+  event = "VeryLazy",
   config = function()
     require('nvim-ack').setup({})
     vim.keymap.set('n', '<leader>gv',

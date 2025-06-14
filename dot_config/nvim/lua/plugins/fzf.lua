@@ -1,6 +1,7 @@
 return {
   'junegunn/fzf.vim',
   dependencies = { 'junegunn/fzf', build = ':call fzf#install()' },
+  event = "VeryLazy",
   init = function()
     vim.g.fzf_command_prefix = 'Fzf'
     vim.g.fzf_preview_window = ''

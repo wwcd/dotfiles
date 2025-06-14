@@ -38,4 +38,5 @@ vim.opt.diffopt:append('iwhite')
 
 -- Misc
 vim.loader.enable()
-vim.diagnostic.config({ signs = true, underline = false, virtual_text = { prefix = '●' }, })
+vim.diagnostic.config({ signs = false, underline = false, virtual_text = { prefix = '●' }, })
+vim.deprecate = function() end
