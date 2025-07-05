@@ -75,7 +75,7 @@ return {
               },
               analyses = {
                 unusedparams = false,
-              }
+              },
             }
           }
         },
@@ -89,7 +89,7 @@ return {
                 globals = { 'vim' },
               },
               workspace = {
-                library = vim.api.nvim_get_runtime_file('', true),
+                library = { vim.env.VIMRUNTIME },
                 checkThirdParty = false,
               },
               telemetry = {
@@ -106,6 +106,7 @@ return {
         taplo = {},
         lemminx = {},
       }
+      servers.gopls.settings.gopls["local"] = "go.zte.com.cn"
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities.textDocument.completion.completionItem.snippetSupport = true

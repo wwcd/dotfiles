@@ -4,15 +4,9 @@ $hostname\
 $directory\
 $git_branch\
 $git_commit\
-$cmd_duration\
 $line_break\
 $python\
 $character"""
-
-# $git_state\
-# $git_status\
-
-# command_timeout = 1000
 
 [username]
 format = "[$user]($style)"
@@ -65,6 +59,8 @@ style = "bright-black"
 [cmd_duration]
 format = "[($duration)]($style)"
 style = "yellow"
+show_milliseconds = true
+min_time = 0
 
 [python]
 format = "[($virtualenv )]($style)"
