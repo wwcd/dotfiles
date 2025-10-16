@@ -6,7 +6,6 @@ if not vim.uv.fs_stat(lazypath) then
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
     "--branch=stable",
-    -- "--branch=v9.6.0",
     lazypath,
   })
 end
@@ -14,7 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup("plugins",
   {
-    -- defaults = { version = "v9.6.0" },
     change_detection = { enable = false, notify = false },
     checker = { enable = false, notify = false },
     ui = {
@@ -57,3 +55,6 @@ require("lazy").setup("plugins",
     }
   }
 )
+
+-- vim.cmd.packadd("nvim.difftool")
+-- vim.cmd.packadd("nvim.undotree")

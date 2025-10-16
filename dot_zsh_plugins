@@ -14,8 +14,20 @@ if whence -w zi | grep "alias" &>/dev/null; then
 fi
 
 # zinit annex
-zinit light-mode for zdharma-continuum/zinit-annex-bin-gem-node
+zinit light-mode for zdharma-continuum/zinit-annex-binary-symlink
 zinit light-mode for zdharma-continuum/zinit-annex-patch-dl
+zinit light-mode for zdharma-continuum/fast-syntax-highlighting
+FAST_HIGHLIGHT_STYLES[path-to-dir]='fg=magenta'
+
+# Awesome
+zinit light-mode for "zsh-users/zsh-completions"
+zinit light-mode for "zsh-users/zsh-autosuggestions"
+# zinit light-mode for "zsh-users/zsh-syntax-highlighting"
+# ZSH_HIGHLIGHT_STYLES[path]=none
+# ZSH_HIGHLIGHT_STYLES[path_prefix]=none
+# ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=green'
+# ZSH_HIGHLIGHT_STYLES[precommand]='fg=green'
+# ZSH_HIGHLIGHT_STYLES[autodirectory]='fg=green'
 
 # completion
 setopt noautomenu
@@ -42,46 +54,36 @@ unsetopt BEEP
 
 # Themes
 export STARSHIP_CONFIG=~/.config/starship/config.toml
-zinit lucid from"gh-r" as"null" for sbin"**/starship" @starship/starship
+zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/starship" @starship/starship
 eval "$(starship init zsh)"
 
 # Autojump
 export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS --layout=reverse --height=30%"
-zinit lucid from"gh-r" as"null" for completions sbin"**/zoxide" @ajeetdsouza/zoxide
+zinit lucid from"gh-r" as"null" for completions bpick"*linux*musl*" lbin"**/zoxide" @ajeetdsouza/zoxide
 eval "$(zoxide init zsh)"
 
 # FZF
 export FZF_DEFAULT_COMMAND='fd --type f --color never'
-export FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1 --preview-window=0 --no-separator --prompt="❯ " --pointer=">"'
+export FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1 --preview-window=0 --no-separator --prompt="❯ " --pointer=">" --gutter=" "'
 export FZF_CTRL_T_COMMAND='fd --type f --color never'
 export FZF_ALT_C_COMMAND='fd --type d --color never'
-zinit lucid from"gh-r" as"null" for sbin"**/fzf" @junegunn/fzf
+zinit lucid from"gh-r" as"null" for lbin"**/fzf" @junegunn/fzf
 zinit for https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
 
 # Tools
-zinit lucid from"gh-r" as"null" for sbin"**/tealdeer* -> tldr" @dbrgn/tealdeer
-zinit lucid from"gh-r" as"null" for sbin"**/delta" @dandavison/delta
-zinit lucid from"gh-r" as"null" atload"alias ls=lsd" for sbin"**/lsd" @lsd-rs/lsd
-zinit lucid from"gh-r" as"null" for sbin"**/dust" @bootandy/dust
-zinit lucid from"gh-r" as"null" for sbin"**/duf" @muesli/duf
-zinit lucid from"gh-r" as"null" for sbin"**/fd" @sharkdp/fd
-zinit lucid from"gh-r" as"null" for sbin"**/bat" @sharkdp/bat
-zinit lucid from"gh-r" as"null" for sbin"**/sd" @chmln/sd
-zinit lucid from"gh-r" as"null" for sbin"**/rg" @burntsushi/ripgrep
-zinit lucid from"gh-r" as"null" for sbin"**/procs" @dalance/procs
-zinit lucid from"gh-r" as"null" for sbin"**/yq* -> yq" @mikefarah/yq
-zinit lucid from"gh-r" as"null" for sbin"**/jq* -> jq" @jqlang/jq
-zinit lucid from"gh-r" as"null" for sbin"**/tokei* -> tokei" @xampprocky/tokei
-
-# Awesome
-# zinit light "jeffreytse/zsh-vi-mode"
-zinit light "zsh-users/zsh-completions"
-zinit light "zsh-users/zsh-autosuggestions"
-zinit light "zsh-users/zsh-syntax-highlighting"
-ZSH_HIGHLIGHT_STYLES[path]=none
-ZSH_HIGHLIGHT_STYLES[path_prefix]=none
-ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=green'
-ZSH_HIGHLIGHT_STYLES[precommand]='fg=green'
-ZSH_HIGHLIGHT_STYLES[autodirectory]='fg=green'
+zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/tealdeer* -> tldr" @tealdeer-rs/tealdeer
+zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/delta" @dandavison/delta
+zinit lucid from"gh-r" as"null" atload"alias ls=lsd" for bpick"*linux*musl*" lbin"**/lsd" @lsd-rs/lsd
+zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/dust" @bootandy/dust
+zinit lucid from"gh-r" as"null" for lbin"**/duf" @muesli/duf
+zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/fd" @sharkdp/fd
+zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/hexyl" @sharkdp/hexyl
+zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/bat" @sharkdp/bat
+zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/sd" @chmln/sd
+zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/rg" @burntsushi/ripgrep
+zinit lucid from"gh-r" as"null" for lbin"**/procs" @dalance/procs
+zinit lucid from"gh-r" as"null" for lbin"**/yq* -> yq" @mikefarah/yq
+# zinit lucid from"gh-r" as"null" for lbin"**/jq* -> jq" @jqlang/jq
+zinit lucid from"gh-r" as"null" ver"v12.1.2" for lbin"**/tokei* -> tokei" @xampprocky/tokei
 
 # vim: sw=2 ts=2 et

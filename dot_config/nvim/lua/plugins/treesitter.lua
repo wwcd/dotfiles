@@ -1,4 +1,5 @@
 return {
+  -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -74,6 +75,7 @@ return {
       })
     end
   },
+  -- Textobjects
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
     event = "VeryLazy",
