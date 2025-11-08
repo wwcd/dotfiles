@@ -6,53 +6,21 @@ if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
   command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git"
 fi
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+# autoload -Uz _zinit
+# (( ${+_comps} )) && _comps[zinit]=_zinit
 # disable zi alias
-if whence -w zi | grep "alias" &>/dev/null; then
-  unalias zi
-fi
+alias -L zi &>/dev/null && unalias zi
 
 # zinit annex
-zinit light-mode for zdharma-continuum/zinit-annex-binary-symlink
-zinit light-mode for zdharma-continuum/zinit-annex-patch-dl
-zinit light-mode for zdharma-continuum/fast-syntax-highlighting
+zinit light-mode for \
+  zdharma-continuum/zinit-annex-binary-symlink \
+  zdharma-continuum/zinit-annex-patch-dl \
+  zdharma-continuum/fast-syntax-highlighting \
+  zsh-users/zsh-completions \
+  zsh-users/zsh-autosuggestions
 FAST_HIGHLIGHT_STYLES[path-to-dir]='fg=magenta'
 
-# Awesome
-zinit light-mode for "zsh-users/zsh-completions"
-zinit light-mode for "zsh-users/zsh-autosuggestions"
-# zinit light-mode for "zsh-users/zsh-syntax-highlighting"
-# ZSH_HIGHLIGHT_STYLES[path]=none
-# ZSH_HIGHLIGHT_STYLES[path_prefix]=none
-# ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=green'
-# ZSH_HIGHLIGHT_STYLES[precommand]='fg=green'
-# ZSH_HIGHLIGHT_STYLES[autodirectory]='fg=green'
-
-# completion
-setopt noautomenu
-fpath=(~/.zsh/completion /usr/share/zsh/vendor-completions $fpath)
-autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-	compinit -i;
-else
-	compinit -C;
-fi
-
-# History
-export HISTFILE=$HOME/.zsh_history
-export HISTSIZE=100000
-export SAVEHIST=$HISTSIZE
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt INC_APPEND_HISTORY
-setopt SHARE_HISTORY
-
-# misc
-bindkey \^U backward-kill-line
-unsetopt BEEP
-
-# Themes
+# Prompt
 export STARSHIP_CONFIG=~/.config/starship/config.toml
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/starship" @starship/starship
 eval "$(starship init zsh)"
@@ -70,7 +38,7 @@ export FZF_ALT_C_COMMAND='fd --type d --color never'
 zinit lucid from"gh-r" as"null" for lbin"**/fzf" @junegunn/fzf
 zinit for https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
 
-# Tools
+# CLI Tools
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/tealdeer* -> tldr" @tealdeer-rs/tealdeer
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/delta" @dandavison/delta
 zinit lucid from"gh-r" as"null" atload"alias ls=lsd" for bpick"*linux*musl*" lbin"**/lsd" @lsd-rs/lsd
@@ -85,5 +53,35 @@ zinit lucid from"gh-r" as"null" for lbin"**/procs" @dalance/procs
 zinit lucid from"gh-r" as"null" for lbin"**/yq* -> yq" @mikefarah/yq
 # zinit lucid from"gh-r" as"null" for lbin"**/jq* -> jq" @jqlang/jq
 zinit lucid from"gh-r" as"null" ver"v12.1.2" for lbin"**/tokei* -> tokei" @xampprocky/tokei
+
+# History
+export HISTFILE=$HOME/.zsh_history
+export HISTSIZE=100000
+export SAVEHIST=$HISTSIZE
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+setopt inc_append_history
+setopt share_history
+
+# misc
+export EDITOR='nvim'
+bindkey -e
+bindkey -r '^_' # disable ctrl-/ for tmux
+bindkey '^U' backward-kill-line
+unsetopt beep
+unsetopt flow_control
+
+# completion
+setopt noautomenu
+typeset -U fpath
+fpath=(~/.zsh/completion /usr/share/zsh/vendor-completions $fpath)
+autoload -Uz compinit
+if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
+	compinit -u -i
+else
+	compinit -C
+fi
+
+zinit cdreplay -q
 
 # vim: sw=2 ts=2 et

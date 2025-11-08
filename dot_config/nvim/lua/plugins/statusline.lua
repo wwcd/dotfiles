@@ -12,7 +12,7 @@ return {
 			component_separators = { left = '', right = '|' },
 			section_separators = { left = '', right = '' },
 		},
-		extensions = { 'quickfix', 'fzf', 'outline', 'nvimtree' },
+		extensions = { 'quickfix', 'fzf', 'outline' },
 		sections = {
 			lualine_a = { { 'mode', fmt = function(mode) return vim.go.paste == true and mode .. ' PASTE' or mode end } },
 			lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_diagnostic' } } },

@@ -42,3 +42,7 @@
     keep-plus-minus-markers = false
 [http]
 	sslVerify = false
+[tag]
+	sort = creatordate
+[branch]
+	sort = creatordate
