@@ -2,82 +2,67 @@ return {
   -- Treesitter
   {
     'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+    lazy = false,
     build = ':TSUpdate',
     config = function()
-      require 'nvim-treesitter.configs'.setup({
-        ensure_installed = {
-          -- 'bash',
-          -- 'c',
-          'cmake',
-          'cpp',
-          'css',
-          'csv',
-          'diff',
-          'dockerfile',
-          'go',
-          'gomod',
-          'gosum',
-          'gotmpl',
-          'gowork',
-          'groovy',
-          'helm',
-          'html',
-          'ini',
-          'javascript',
-          'json',
-          'jsonc',
-          'jinja',
-          'jinja_inline',
-          -- 'lua',
-          'luadoc',
-          'make',
-          -- 'markdown',
-          -- 'markdown_inline',
-          -- 'python',
-          -- 'query',
-          'regex',
-          'rust',
-          'sql',
-          'toml',
-          'typescript',
-          -- 'vim',
-          -- 'vimdoc',
-          'xml',
-          'yaml',
-        },
-        sync_install = false,
-        auto_install = true,
-        ignore_install = {},
-        modules = {},
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        incremental_selection = { enable = true, },
-        indent = { enable = false, },
-        textobjects = {
-          select = {
-            enable = true,
-            -- Automatically jump forward to textobj, similar to targets.vim
-            lookahead = true,
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['ac'] = '@class.outer',
-              ['ic'] = '@class.inner',
-            },
-          },
-        },
-        playground = {
-          enable = true,
-        }
+      local ensure_installed = {
+        "cpp", "rust", "go", "gomod", "gosum", "gotmpl", "bash", "python", "nu",
+        "toml", "json", "yaml", "xml", "diff", "dockerfile", "make", "cmake",
+        "c", "markdown", "markdown_inline", "lua", "query", "vim", "vimdoc"
+      }
+
+      require('nvim-treesitter').install(ensure_installed)
+
+      -- Ensure tree-sitter enabled after opening a file for target language
+      local filetypes = {}
+      for _, lang in ipairs(ensure_installed) do
+        for _, ft in ipairs(vim.treesitter.language.get_filetypes(lang)) do
+          table.insert(filetypes, ft)
+        end
+      end
+      local ts_start = function(ev) vim.treesitter.start(ev.buf) end
+
+      -- WARN: Do not use "*" here - snacks.nvim is buggy and vim.notify triggers FileType events internally causing infinite callback loops
+      vim.api.nvim_create_autocmd('FileType', {
+        desc = 'Start treesitter',
+        group = vim.api.nvim_create_augroup('start_treesitter', { clear = true }),
+        pattern = filetypes,
+        callback = ts_start,
       })
-    end
+    end,
   },
   -- Textobjects
   {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    event = "VeryLazy",
+    branch = 'main',
+    lazy = false,
+    config = function()
+      -- configuration
+      require("nvim-treesitter-textobjects").setup {
+        select = {
+          lookahead = true,
+          include_surrounding_whitespace = false,
+        },
+      }
+      -- keymaps
+      -- You can use the capture groups defined in `textobjects.scm`
+      vim.keymap.set({ "x", "o" }, "af", function()
+        require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
+      end)
+      vim.keymap.set({ "x", "o" }, "if", function()
+        require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
+      end)
+      vim.keymap.set({ "x", "o" }, "ac", function()
+        require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects")
+      end)
+      vim.keymap.set({ "x", "o" }, "ic", function()
+        require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
+      end)
+      -- You can also use captures from other query groups like `locals.scm`
+      vim.keymap.set({ "x", "o" }, "as", function()
+        require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals")
+      end)
+    end,
   },
 }

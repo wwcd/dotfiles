@@ -38,6 +38,9 @@ export FZF_ALT_C_COMMAND='fd --type d --color never'
 zinit lucid from"gh-r" as"null" for lbin"**/fzf" @junegunn/fzf
 zinit for https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
 
+# BAT-MAN
+export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
+
 # CLI Tools
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/tealdeer* -> tldr" @tealdeer-rs/tealdeer
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/delta" @dandavison/delta
@@ -77,9 +80,9 @@ typeset -U fpath
 fpath=(~/.zsh/completion /usr/share/zsh/vendor-completions $fpath)
 autoload -Uz compinit
 if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
-	compinit -u -i
+  compinit -u -i
 else
-	compinit -C
+  compinit -C
 fi
 
 zinit cdreplay -q

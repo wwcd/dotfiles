@@ -46,3 +46,5 @@
 	sort = creatordate
 [branch]
 	sort = creatordate
+[init]
+	defaultBranch = main

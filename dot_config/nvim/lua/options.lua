@@ -35,6 +35,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.diffopt:append('linematch:60')
 vim.opt.diffopt:append('iwhite')
+vim.opt.fileencodings="ucs-bom,utf-8,gb18030,gbk,latin1"
 
 -- Misc
 vim.loader.enable()

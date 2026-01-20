@@ -140,23 +140,6 @@ return {
     end
   },
 
-  -- Null-ls for formatters and linters
-  {
-    'nvimtools/none-ls.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    config = function()
-      require('null-ls').setup({
-        sources = {
-          require('null-ls').builtins.formatting.shfmt,
-          require('null-ls').builtins.formatting.yapf,
-          require('null-ls').builtins.formatting.yamlfmt,
-        }
-      })
-    end
-  },
-
   -- Mason and Mason LSPConfig
   {
     "mason-org/mason-lspconfig.nvim",
@@ -164,11 +147,7 @@ return {
       'mason-org/mason.nvim',
     },
     config = function()
-      require("mason").setup({
-        ensure_installed = {
-          "yapf", "shfmt", "yamlfmt",
-        },
-      })
+      require("mason").setup({ })
       require("mason-lspconfig").setup({
         ensure_installed = {
           -- "cssls", "html", "lemminx", "ts_ls",
