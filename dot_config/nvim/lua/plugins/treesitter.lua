@@ -7,9 +7,33 @@ return {
     build = ':TSUpdate',
     config = function()
       local ensure_installed = {
-        "cpp", "rust", "go", "gomod", "gosum", "gotmpl", "bash", "python", "nu",
-        "toml", "json", "yaml", "xml", "diff", "dockerfile", "make", "cmake",
-        "c", "markdown", "markdown_inline", "lua", "query", "vim", "vimdoc"
+        "cpp",
+        "rust",
+        "go",
+        "gomod",
+        "gosum",
+        "gotmpl",
+        "bash",
+        "python",
+        "nu",
+        "proto",
+
+        "toml",
+        "json",
+        "yaml",
+        "xml",
+        "diff",
+        "dockerfile",
+        "make",
+        "cmake",
+
+        "c",
+        "markdown",
+        "markdown_inline",
+        "lua",
+        "query",
+        "vim",
+        "vimdoc"
       }
 
       require('nvim-treesitter').install(ensure_installed)

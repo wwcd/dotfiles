@@ -20,22 +20,21 @@ vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.wrap = false
-vim.opt.shada = [[!,%,'300,<100,@1000,h]]
+vim.opt.shada = { "!", "%", "'300", "<100", "@1000", "h" }
 vim.opt.undofile = true
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
-vim.opt.completeopt = [[noinsert,noselect,menuone]]
-vim.opt.listchars = [[tab:» ,eol:$,trail:~,extends:>,precedes:<,space:·]]
+vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
+vim.opt.listchars = { tab = "» ", eol = "$", trail = "~", extends = ">", precedes = "<", space = "·" }
 vim.opt.showmode = false
 vim.opt.mouse = ''
 vim.opt.inccommand = 'split'
 vim.opt.splitkeep = 'screen'
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-vim.opt.diffopt:append('linematch:60')
-vim.opt.diffopt:append('iwhite')
-vim.opt.fileencodings="ucs-bom,utf-8,gb18030,gbk,latin1"
+vim.opt.diffopt = { "internal", "filler", "closeoff", "algorithm:histogram", "indent-heuristic", "linematch:60", "iwhite" }
+vim.opt.fileencodings = { "ucs-bom", "utf-8", "gb18030", "gbk", "latin1" }
 
 -- Misc
 vim.loader.enable()
