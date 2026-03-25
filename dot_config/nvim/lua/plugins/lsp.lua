@@ -93,7 +93,10 @@ return {
                 unusedparams = false,
               },
             }
-          }
+          },
+          before_init = function(_, config)
+            config.settings.gopls["local"] = vim.fn.trim(vim.fn.system("go list -m -f '{{.Path}}'"))
+          end,
         },
         lua_ls = {
           settings = {
@@ -147,7 +150,7 @@ return {
       'mason-org/mason.nvim',
     },
     config = function()
-      require("mason").setup({ })
+      require("mason").setup({})
       require("mason-lspconfig").setup({
         ensure_installed = {
           -- "cssls", "html", "lemminx", "ts_ls",

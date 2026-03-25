@@ -3,7 +3,6 @@ $username\
 $hostname\
 $directory\
 $git_branch\
-$git_commit\
 $line_break\
 $python\
 $character"""
@@ -29,7 +28,6 @@ read_only = ""
 style = "blue"
 
 [character]
-# format = "$symbol "
 success_symbol = "[❯](purple)"
 error_symbol = "[❯](red)"
 vicmd_symbol = "[❮](green)"
@@ -38,23 +36,13 @@ vicmd_symbol = "[❮](green)"
 format = "[$branch(:$remote_branch)]($style) "
 style = "bright-black"
 
-[git_commit]
-format = "[$hash($tag)]($style) "
-style = "bright-black"
-tag_symbol = " tag:"
-tag_disabled = false
-
 [git_status]
-format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](bright-black)( $ahead_behind$stashed)]($style)"
+format = "[$ahead_behind$modified$untracked$stashed$conflicted$renamed$deleted]($style)"
 style = "cyan"
 stashed = "≡"
 diverged = "⇡⇣"
 ahead = "⇡"
 behind = "⇣"
-
-[git_state]
-format = '\([$state( $progress_current/$progress_total)]($style)\)'
-style = "bright-black"
 
 [cmd_duration]
 format = "[($duration)]($style)"

@@ -35,6 +35,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.diffopt = { "internal", "filler", "closeoff", "algorithm:histogram", "indent-heuristic", "linematch:60", "iwhite" }
 vim.opt.fileencodings = { "ucs-bom", "utf-8", "gb18030", "gbk", "latin1" }
+vim.opt.shortmess = 'I'
 
 -- Misc
 vim.loader.enable()
