@@ -20,23 +20,23 @@ zinit light-mode for \
   zsh-users/zsh-autosuggestions
 FAST_HIGHLIGHT_STYLES[path-to-dir]='fg=magenta'
 
+# FZF
+export FZF_DEFAULT_COMMAND='fd --type f --color never'
+export FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1 --style minimal --prompt="❯ " --gutter=" " --height=30%'
+export FZF_CTRL_T_COMMAND='fd --type f --color never'
+export FZF_ALT_C_COMMAND='fd --type d --color never'
+zinit lucid from"gh-r" as"null" for lbin"**/fzf" @junegunn/fzf
+zinit for https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
+
 # Prompt
 export STARSHIP_CONFIG=~/.config/starship/config.toml
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/starship" @starship/starship
 eval "$(starship init zsh)"
 
 # Autojump
-export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS --layout=reverse --height=30%"
+export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
 zinit lucid from"gh-r" as"null" for completions bpick"*linux*musl*" lbin"**/zoxide" @ajeetdsouza/zoxide
 eval "$(zoxide init zsh)"
-
-# FZF
-export FZF_DEFAULT_COMMAND='fd --type f --color never'
-export FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1 --preview-window=0 --no-separator --prompt="❯ " --pointer=">" --gutter=" "'
-export FZF_CTRL_T_COMMAND='fd --type f --color never'
-export FZF_ALT_C_COMMAND='fd --type d --color never'
-zinit lucid from"gh-r" as"null" for lbin"**/fzf" @junegunn/fzf
-zinit for https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
 
 # BAT-MAN
 export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
@@ -54,8 +54,8 @@ zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/sd" @chmln/sd
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/rg" @burntsushi/ripgrep
 zinit lucid from"gh-r" as"null" for lbin"**/procs" @dalance/procs
 zinit lucid from"gh-r" as"null" for lbin"**/yq* -> yq" @mikefarah/yq
-# zinit lucid from"gh-r" as"null" for lbin"**/jq* -> jq" @jqlang/jq
-zinit lucid from"gh-r" as"null" ver"v12.1.2" for lbin"**/tokei* -> tokei" @xampprocky/tokei
+zinit lucid from"gh-r" as"null" for lbin"**/jq* -> jq" @jqlang/jq
+zinit lucid from"gh-r" as"null" for lbin"**/tokei* -> tokei" @xampprocky/tokei
 
 # History
 export HISTFILE=$HOME/.zsh_history

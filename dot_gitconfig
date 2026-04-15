@@ -1,6 +1,6 @@
 [user]
     name = wsl
-    email = shoulinwang@gmail.com
+    email = wsl@noreply.pseudo
 [alias]
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     changes = diff --name-status -r
@@ -10,10 +10,9 @@
     ci = commit
     co = checkout
     st = status
-    s = status
     br = branch
     di = diff
-    d = diff
+    ds = diff --staged
     sw = switch
     cp = cherry-pick
 [merge]
@@ -26,6 +25,10 @@
     ui = true
 [push]
     default = simple
+; [pull]
+;     rebase = true
+[fetch]
+    prune = true
 [credential]
     helper = store
 [core]
@@ -41,10 +44,10 @@
 [delta "interactive"]
     keep-plus-minus-markers = false
 [http]
-	sslVerify = false
+    sslVerify = false
 [tag]
-	sort = creatordate
+    sort = creatordate
 [branch]
-	sort = creatordate
+    sort = creatordate
 [init]
-	defaultBranch = main
+    defaultBranch = main
