@@ -46,8 +46,13 @@ vim.opt.splitbelow = true
 vim.opt.diffopt = { "internal", "filler", "closeoff", "algorithm:histogram", "indent-heuristic", "linematch:60", "iwhite" }
 vim.opt.fileencodings = { "ucs-bom", "utf-8", "gb18030", "gbk", "latin1" }
 vim.opt.shortmess = 'I'
+vim.opt.scrolloff = 99
+vim.opt.scrolloffpad = 1
 
 -- Misc
 vim.loader.enable()
 vim.diagnostic.config({ signs = false, underline = false, virtual_text = { prefix = '●' }, })
 -- vim.deprecate = function() end
+
+-- UI2
+require('vim._core.ui2').enable({})

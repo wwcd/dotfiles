@@ -8,6 +8,9 @@ local M = {}
 
 M.sections = {
   lualine_a = { outline_statusline },
+  lualine_x = { 'filetype' },
+  lualine_y = { 'progress' },
+  lualine_z = { 'location' },
 }
 
 M.filetypes = { 'aerial' }

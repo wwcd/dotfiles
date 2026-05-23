@@ -35,6 +35,7 @@ local ensure_installed = {
   "make",
   "cmake",
 
+  -- embedded languages
   "c",
   "markdown",
   "markdown_inline",

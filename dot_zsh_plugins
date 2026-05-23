@@ -29,7 +29,7 @@ zinit lucid from"gh-r" as"null" for lbin"**/fzf" @junegunn/fzf
 zinit for https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
 
 # Prompt
-export STARSHIP_CONFIG=~/.config/starship/config.toml
+export STARSHIP_CONFIG=$HOME/.config/starship/config.toml
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/starship" @starship/starship
 eval "$(starship init zsh)"
 
@@ -72,7 +72,7 @@ bindkey -e
 bindkey -r '^_' # disable ctrl-/ for tmux
 bindkey '^U' backward-kill-line
 unsetopt beep
-unsetopt flow_control
+unsetopt flow_control # disable ctrl-s/q
 
 # completion
 setopt noautomenu

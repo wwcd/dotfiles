@@ -7,17 +7,3 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
   end,
 })
-
--- Update packages
-vim.api.nvim_create_user_command("PackUpdate", function(info)
-  if #info.fargs ~= 0 then
-    vim.pack.update(info.fargs, { force = info.bang })
-  else
-    vim.notify("Updating everything.", vim.log.levels.INFO)
-    vim.pack.update(nil, { force = info.bang })
-  end
-end, {
-  desc = "Update packages",
-  nargs = "*",
-  bang = true,
-})
