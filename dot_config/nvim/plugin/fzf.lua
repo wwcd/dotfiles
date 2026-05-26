@@ -5,6 +5,11 @@ vim.g.fzf_layout = { down = '~30%' }
 vim.env.FZF_DEFAULT_COMMAND = 'fd --type f --strip-cwd-prefix --follow'
 vim.env.FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1 --style minimal --prompt="❯ " --gutter=" "'
 
+-- https://github.com/junegunn/fzf.vim/commit/31e338e3143eddd6dbc424870899af28d987d30f#commitcomment-186153572
+vim.g.fzf_vim = {
+  buffers_options = '--no-header --info default'
+}
+
 vim.pack.add({
   "https://github.com/junegunn/fzf",
   "https://github.com/junegunn/fzf.vim"
