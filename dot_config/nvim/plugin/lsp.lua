@@ -87,7 +87,8 @@ local servers = {
   },
   rust_analyzer = {},
   clangd = {
-    cmd = { 'clangd', '--clang-tidy' }
+    cmd = { 'clangd', '--clang-tidy' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
   },
   neocmake = {},
   bashls = {},
@@ -128,8 +129,12 @@ local servers = {
   -- html = {},
   -- ts_ls = {},
   -- lemminx = {}, --xml
-  jsonls = {},
-  yamlls = {},
+  jsonls = {
+    filetypes = { 'json', 'jsonc' },
+  },
+  yamlls = {
+    filetypes = { 'yaml' },
+  },
   taplo = {}, --toml
 }
 
