@@ -38,7 +38,7 @@ vim.opt.shada = { "!", "%", "'300", "<100", "@1000", "h" }
 vim.opt.undofile = true
 vim.opt.backup = false
 vim.opt.writebackup = false
-vim.opt.swapfile = false
+vim.opt.updatecount = 0 -- disable swapfile replace swapfile = false
 vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 vim.opt.listchars = { tab = "» ", eol = "$", trail = "~", extends = ">", precedes = "<", space = "·" }
 vim.opt.showmode = false

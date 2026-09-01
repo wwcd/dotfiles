@@ -21,12 +21,13 @@ zinit light-mode for \
 FAST_HIGHLIGHT_STYLES[path-to-dir]='fg=magenta'
 
 # FZF
-export FZF_DEFAULT_COMMAND='fd --type f --color never'
 export FZF_DEFAULT_OPTS='--color=bg+:-1,bg:-1 --style minimal --prompt="❯ " --gutter=" " --height=30%'
+export FZF_CTRL_R_OPTS="--with-nth=2.. --accept-nth=2.."
+export FZF_DEFAULT_COMMAND='fd --type f --color never'
 export FZF_CTRL_T_COMMAND='fd --type f --color never'
 export FZF_ALT_C_COMMAND='fd --type d --color never'
 zinit lucid from"gh-r" as"null" for lbin"**/fzf" @junegunn/fzf
-zinit for https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
+eval "$(fzf --zsh)"
 
 # Prompt
 export STARSHIP_CONFIG=$HOME/.config/starship/config.toml
@@ -49,7 +50,7 @@ zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/dust" @bootandy/
 zinit lucid from"gh-r" as"null" for lbin"**/duf" @muesli/duf
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/fd" @sharkdp/fd
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/hexyl" @sharkdp/hexyl
-zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/bat" @sharkdp/bat
+zinit lucid from"gh-r" as"null" atload"alias cat='bat -Pp'" for bpick"*linux*musl*" lbin"**/bat" @sharkdp/bat
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/sd" @chmln/sd
 zinit lucid from"gh-r" as"null" for bpick"*linux*musl*" lbin"**/rg" @burntsushi/ripgrep
 zinit lucid from"gh-r" as"null" for lbin"**/procs" @dalance/procs

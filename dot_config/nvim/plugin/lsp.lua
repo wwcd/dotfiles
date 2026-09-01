@@ -19,10 +19,14 @@ require("mason-lspconfig").setup({
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)
-    -- "grn" is mapped in Normal mode to vim.lsp.buf.rename()
-    -- "gra" is mapped in Normal and Visual mode to vim.lsp.buf.code_action()
-    -- "grr" is mapped in Normal mode to vim.lsp.buf.references()
-    -- CTRL-S is mapped in Insert mode to vim.lsp.buf.signature_help()
+    -- "gra" (Normal and Visual mode) is mapped to |vim.lsp.buf.code_action()|
+    -- "gri" is mapped to |vim.lsp.buf.implementation()|
+    -- "grn" is mapped to |vim.lsp.buf.rename()|
+    -- "grr" is mapped to |vim.lsp.buf.references()|
+    -- "grt" is mapped to |vim.lsp.buf.type_definition()|
+    -- "grx" is mapped to |vim.lsp.codelens.run()|
+    -- "gO" is mapped to |vim.lsp.buf.document_symbol()|
+    -- CTRL-S (Insert mode) is mapped to |vim.lsp.buf.signature_help()|
 
     local opts = { noremap = true, silent = true, buffer = event.buf }
     vim.keymap.set('n', ';r', vim.lsp.buf.references, opts)
@@ -90,7 +94,7 @@ local servers = {
     cmd = { 'clangd', '--clang-tidy' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
   },
-  neocmake = {},
+  -- neocmake = {},
   bashls = {},
   gopls = {
     settings = {

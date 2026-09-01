@@ -29,6 +29,7 @@ local ensure_installed = {
   "toml",
   "json",
   "yaml",
+  "ini",
   "xml",
   "diff",
   "dockerfile",
