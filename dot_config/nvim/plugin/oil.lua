@@ -13,9 +13,9 @@ require("oil").setup({
     ["gs"] = { "actions.change_sort", mode = "n" },
     ["gx"] = "actions.open_external",
     ["g."] = { "actions.toggle_hidden", mode = "n" },
-    ["g\\"] = { "actions.toggle_trash", mode = "n" },
+    ["g\\"] = { "actions.toggle_trash", mode = "n" }
   },
-  use_default_keymaps = false,
+  use_default_keymaps = false
 })
 
 vim.keymap.set('n', '<leader>e', '<cmd>Oil<cr>')

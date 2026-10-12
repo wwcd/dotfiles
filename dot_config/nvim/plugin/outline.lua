@@ -6,11 +6,11 @@ require('aerial').setup({
   highlight_on_jump = false,
   layout = {
     default_direction = 'left',
-    min_width = 30,
+    min_width = 30
   },
   keymaps = {
     ["<C-j>"] = false,
-    ["<C-k>"] = false,
+    ["<C-k>"] = false
   }
 })
 

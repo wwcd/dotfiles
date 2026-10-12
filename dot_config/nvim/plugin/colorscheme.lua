@@ -6,7 +6,7 @@ require('onedark').setup({
     ["@text.uri"] = { fmt = 'none' },
     ["@string.special.url"] = { fmt = 'none' },
     QuickFixLine = { fmt = 'none' }
-  },
+  }
 })
 
 require('onedark').load()

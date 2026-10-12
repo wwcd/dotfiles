@@ -39,6 +39,7 @@ vim.opt.undofile = true
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.updatecount = 0 -- disable swapfile replace swapfile = false
+vim.opt.updatetime = 250
 vim.opt.completeopt = { "menuone", "noinsert", "noselect" }
 vim.opt.listchars = { tab = "» ", eol = "$", trail = "~", extends = ">", precedes = "<", space = "·" }
 vim.opt.showmode = false
@@ -49,7 +50,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.diffopt = { "internal", "filler", "closeoff", "algorithm:histogram", "indent-heuristic", "linematch:60", "iwhite" }
 vim.opt.fileencodings = { "ucs-bom", "utf-8", "gb18030", "gbk", "latin1" }
-vim.opt.shortmess = 'I'
+vim.opt.shortmess:append({ I = true })
 vim.opt.scrolloff = 99
 vim.opt.scrolloffpad = 1
 

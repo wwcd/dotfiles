@@ -69,7 +69,7 @@ setopt share_history
 
 # misc
 export EDITOR='nvim'
-bindkey -e
+bindkey -e # emacs keybindings
 bindkey -r '^_' # disable ctrl-/ for tmux
 bindkey '^U' backward-kill-line
 unsetopt beep

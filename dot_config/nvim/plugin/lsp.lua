@@ -4,7 +4,7 @@ vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig"
 })
 
-require("mason").setup({})
+require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = {
     -- "cssls", "html", "lemminx", "ts_ls",
@@ -12,13 +12,13 @@ require("mason-lspconfig").setup({
     -- "copilot"
   },
   automatic_enable = {
-    "copilot",
+    "copilot"
   }
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
-  callback = function(event)
+  callback = function (event)
     -- "gra" (Normal and Visual mode) is mapped to |vim.lsp.buf.code_action()|
     -- "gri" is mapped to |vim.lsp.buf.implementation()|
     -- "grn" is mapped to |vim.lsp.buf.rename()|
@@ -34,15 +34,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', ';a', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', ';i', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    -- vim.keymap.set('i', '<c-s>', vim.lsp.buf.signature_help, opts)
-    -- vim.keymap.set('n', '<c-s>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', ';f', function() vim.lsp.buf.format({ async = true }) end, opts)
+    vim.keymap.set('n', ';f', function () vim.lsp.buf.format({ async = true }) end, opts)
     vim.keymap.set('n', ';d', vim.diagnostic.setloclist, opts)
-
-    vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = event.buf })
-    vim.api.nvim_set_option_value('tagfunc', 'v:lua.vim.lsp.tagfunc', { buf = event.buf })
-    vim.api.nvim_set_option_value('formatexpr', 'v:lua.vim.lsp.formatexpr()', { buf = event.buf })
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client == nil then
@@ -65,14 +58,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- inline completion, only work after neovim commit 58060c2340a52377a0e1d2b782ce1deef13b2b9b
     if client:supports_method('textDocument/inlineCompletion') and vim.lsp.inline_completion then
       vim.lsp.inline_completion.enable(true)
-      vim.keymap.set('i', '<C-f>',
-        function()
+      vim.keymap.set(
+        'i', '<C-f>',
+        function ()
           if not vim.lsp.inline_completion.get() then return '<C-f>' end
         end,
         {
+          buffer = event.buf,
           expr = true,
           replace_keycodes = true,
-          desc = 'Get the current inline completion',
+          desc = 'Get the current inline completion'
         }
       )
     end
@@ -92,9 +87,8 @@ local servers = {
   rust_analyzer = {},
   clangd = {
     cmd = { 'clangd', '--clang-tidy' },
-    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }
   },
-  -- neocmake = {},
   bashls = {},
   gopls = {
     settings = {
@@ -106,53 +100,55 @@ local servers = {
         }
       }
     },
-    before_init = function(_, config)
+    before_init = function (_, config)
       config.settings.gopls["local"] = vim.fn.trim(vim.fn.system("go list -m -f '{{.Path}}'"))
-    end,
+    end
   },
-  lua_ls = {
+  emmylua_ls = {
     settings = {
-      Lua = {
+      emmylua = {
         runtime = {
-          version = 'LuaJIT',
+          version = 'LuaJIT'
         },
         diagnostics = {
-          globals = { 'vim' },
+          globals = { 'vim' }
         },
         workspace = {
-          library = { vim.env.VIMRUNTIME },
-          checkThirdParty = false,
-        },
-        telemetry = {
-          enable = false,
-        },
+          -- library = { vim.env.VIMRUNTIME }
+          library = vim.api.nvim_get_runtime_file('', true)
+        }
       }
-    },
+    }
   },
   -- cssls = {},
   -- html = {},
   -- ts_ls = {},
   -- lemminx = {}, --xml
+  -- neocmake = {},
   jsonls = {
-    filetypes = { 'json', 'jsonc' },
+    filetypes = { 'json', 'jsonc' }
   },
   yamlls = {
-    filetypes = { 'yaml' },
+    filetypes = { 'yaml' }
   },
-  taplo = {}, --toml
+  taplo = {} -- toml
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 for server, config in pairs(servers) do
   vim.lsp.enable(server)
-  vim.lsp.config(server, vim.tbl_deep_extend('force', {
-    capabilities = capabilities,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }, config))
+  vim.lsp.config(
+    server,
+    vim.tbl_deep_extend('force', {
+      capabilities = capabilities,
+      flags = {
+        debounce_text_changes = 150
+      }
+    }, config
+    )
+  )
 end
 vim.env.SHELLCHECK_OPTS = '-e SC2086'

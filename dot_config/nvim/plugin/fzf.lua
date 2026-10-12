@@ -7,7 +7,8 @@ vim.env.FZF_DEFAULT_OPTS = '--color bg:-1,bg+:-1 --style minimal --prompt="❯ "
 
 -- https://github.com/junegunn/fzf.vim/commit/31e338e3143eddd6dbc424870899af28d987d30f#commitcomment-186153572
 vim.g.fzf_vim = {
-  buffers_options = '--no-header --no-footer --info default'
+  buffers_options = '--no-header --no-footer --info default',
+  files_options = '--no-header --no-footer --info default'
 }
 
 vim.pack.add({

@@ -3,10 +3,9 @@ vim.keymap.set('n', '<leader>w', '<cmd>w!<cr>', { silent = true })
 vim.keymap.set('n', '<leader>ba', '<cmd>bufdo bd<cr>', { silent = true })
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<cr>', { silent = true })
 vim.keymap.set('n', '<leader>pp', '<cmd>setlocal paste!<cr>', { silent = true })
-vim.keymap.set('n', '<leader><cr>', '<cmd>noh<cr>', { silent = true })
+vim.keymap.set('n', '<leader><cr>', '<cmd>noh|dif|call nvim_buf_clear_namespace(0, nvim_create_namespace("nvim.multicursor"), 0, -1)|normal! <c-l><cr>', { silent = true })
 vim.keymap.set('v', '>', '>gv', { silent = true })
 vim.keymap.set('v', '<', '<gv', { silent = true })
-vim.keymap.set('n', 'Y', 'y$', { silent = true })
 vim.keymap.set('n', '<leader>cd', '<cmd>cd %:p:h<cr><cmd>pwd<cr>')
 
 -- Tab
@@ -40,3 +39,7 @@ vim.keymap.set('t', '<a-h>', [[<c-\><c-n><c-w>h]])
 vim.keymap.set('t', '<a-j>', [[<c-\><c-n><c-w>j]])
 vim.keymap.set('t', '<a-k>', [[<c-\><c-n><c-w>k]])
 vim.keymap.set('t', '<a-l>', [[<c-\><c-n><c-w>l]])
+
+-- Hightlight current word
+vim.keymap.set("n", "*", "*N")
+vim.keymap.set("n", "#", "*N")
