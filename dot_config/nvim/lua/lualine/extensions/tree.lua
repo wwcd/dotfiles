@@ -14,7 +14,7 @@ M.sections = {
   lualine_c = { tree_current_dir },
   lualine_x = { 'filetype' },
   lualine_y = { 'progress' },
-  lualine_z = { 'location' },
+  lualine_z = { 'location' }
 }
 
 M.filetypes = { 'oil' }

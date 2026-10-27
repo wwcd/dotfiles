@@ -18,7 +18,7 @@ require("mason-lspconfig").setup({
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
-  callback = function (event)
+  callback = function(event)
     -- "gra" (Normal and Visual mode) is mapped to |vim.lsp.buf.code_action()|
     -- "gri" is mapped to |vim.lsp.buf.implementation()|
     -- "grn" is mapped to |vim.lsp.buf.rename()|
@@ -34,7 +34,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', ';a', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', ';i', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', ';f', function () vim.lsp.buf.format({ async = true }) end, opts)
+    vim.keymap.set('n', ';f', function() vim.lsp.buf.format({ async = true }) end, opts)
     vim.keymap.set('n', ';d', vim.diagnostic.setloclist, opts)
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.inline_completion.enable(true)
       vim.keymap.set(
         'i', '<C-f>',
-        function ()
+        function()
           if not vim.lsp.inline_completion.get() then return '<C-f>' end
         end,
         {
@@ -84,7 +84,7 @@ local servers = {
       }
     }
   },
-  rust_analyzer = {},
+  -- rust_analyzer = {},
   clangd = {
     cmd = { 'clangd', '--clang-tidy' },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' }
@@ -100,7 +100,7 @@ local servers = {
         }
       }
     },
-    before_init = function (_, config)
+    before_init = function(_, config)
       config.settings.gopls["local"] = vim.fn.trim(vim.fn.system("go list -m -f '{{.Path}}'"))
     end
   },

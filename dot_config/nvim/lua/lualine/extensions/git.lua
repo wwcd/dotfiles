@@ -13,7 +13,7 @@ M.sections = {
   lualine_b = { git_branch },
   lualine_x = { 'filetype' },
   lualine_y = { 'progress' },
-  lualine_z = { 'location' },
+  lualine_z = { 'location' }
 }
 
 M.filetypes = { 'fugitive' }

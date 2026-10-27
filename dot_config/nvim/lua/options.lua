@@ -56,7 +56,7 @@ vim.opt.scrolloffpad = 1
 
 -- Misc
 vim.loader.enable()
-vim.diagnostic.config({ signs = false, underline = false, virtual_text = { prefix = '●' }, })
+vim.diagnostic.config({ signs = false, underline = false, virtual_text = { prefix = '●' } })
 -- vim.deprecate = function() end
 
 -- UI2
